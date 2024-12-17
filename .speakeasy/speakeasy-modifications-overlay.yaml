@@ -1,0 +1,73 @@
+overlay: 1.0.0
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/bookings/{bookingId}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Bookings.delete-booking()
+      after: sdk.bookings.delete()
+      reviewed_at: 1734444042430
+      created_at: 1734444024731
+  - target: $["paths"]["/bookings/{bookingId}/payment"]["post"]
+    update:
+      x-speakeasy-group: bookings.payments
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payments.create-booking-payment()
+      after: sdk.bookings.payments.create()
+      reviewed_at: 1734444042430
+      created_at: 1734444024731
+  - target: $["paths"]["/stations"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Stations.get-stations()
+      after: sdk.stations.list()
+      reviewed_at: 1734444042430
+      created_at: 1734444024731
+  - target: $["paths"]["/trips"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Trips.get-trips()
+      after: sdk.trips.list()
+      reviewed_at: 1734444042430
+      created_at: 1734444024731
+  - target: $["paths"]["/bookings"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Bookings.get-bookings()
+      after: sdk.bookings.list()
+      reviewed_at: 1734444042430
+      created_at: 1734444024731
+  - target: $["paths"]["/bookings"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Bookings.create-booking()
+      after: sdk.bookings.create()
+      reviewed_at: 1734444042430
+      created_at: 1734444024731
+  - target: $["paths"]["/bookings/{bookingId}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Bookings.get-booking()
+      after: sdk.bookings.get()
+      reviewed_at: 1734444042430
+      created_at: 1734444024731

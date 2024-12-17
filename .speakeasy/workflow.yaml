@@ -1,0 +1,18 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Train Travel API:
+        inputs:
+            - location: ../train-travel-api/openapi.yaml
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/protectearth/protectearth/train-travel-api
+targets:
+    train-travel-sdk:
+        target: typescript
+        source: Train Travel API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/protectearth/protectearth/train-travel-api-typescript-code-samples
+            blocking: false
