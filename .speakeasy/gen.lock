@@ -1,12 +1,14 @@
 lockVersion: 2.0.0
 id: 479c13a8-a64a-4c55-9513-2c2580a50427
 management:
-  docChecksum: 0d60354518df577ca335935c32e8a33b
+  docChecksum: b149800002a5e2638125223936e5cd32
   docVersion: 1.0.0
-  speakeasyVersion: 1.455.7
-  generationVersion: 2.480.1
-  releaseVersion: 0.1.1
-  configChecksum: b1f04f3d75814821d342ba57b0abdc9c
+  speakeasyVersion: 1.456.0
+  generationVersion: 2.481.0
+  releaseVersion: 0.1.2
+  configChecksum: 77398f5ed67be95c7ec467269ae9db36
+  repoURL: https://github.com/bump-sh-examples/train-travel-sdk-ts.git
+  installationURL: https://github.com/bump-sh-examples/train-travel-sdk-ts
 features:
   typescript:
     acceptHeaders: 2.81.2

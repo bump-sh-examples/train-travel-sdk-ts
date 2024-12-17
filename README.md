@@ -17,45 +17,35 @@ Developer-friendly & type-safe Typescript SDK designed to help TypeScript users 
 <!-- Start Summary [summary] -->
 ## Summary
 
-API for finding and booking train trips across Europe.
+Train Travel API: API for finding and booking train trips across Europe.
 
+## Run in Postman
+
+Experiment with this API in Postman, using our Postman Collection.
+
+[![Run In Postman](https://run.pstmn.io/button.svg =128pxx32px)](https://app.getpostman.com/run-collection/9265903-7a75a0d0-b108-4436-ba54-c6139698dc08?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D9265903-7a75a0d0-b108-4436-ba54-c6139698dc08%26entityType%3Dcollection%26workspaceId%3Df507f69d-9564-419c-89a2-cb8e4c8c7b8f)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-- [train-travel-sdk](#train-travel-sdk)
-  - [Summary](#summary)
-  - [Table of Contents](#table-of-contents)
-  - [SDK Installation](#sdk-installation)
-    - [NPM](#npm)
-    - [PNPM](#pnpm)
-    - [Bun](#bun)
-    - [Yarn](#yarn)
-  - [Requirements](#requirements)
-  - [SDK Example Usage](#sdk-example-usage)
-    - [Example](#example)
-  - [Authentication](#authentication)
-    - [Per-Client Security Schemes](#per-client-security-schemes)
-  - [Available Resources and Operations](#available-resources-and-operations)
-    - [bookings](#bookings)
-      - [bookings.payments](#bookingspayments)
-    - [stations](#stations)
-    - [trips](#trips)
-  - [Standalone functions](#standalone-functions)
-  - [File uploads](#file-uploads)
-  - [Retries](#retries)
-  - [Error Handling](#error-handling)
-  - [Server Selection](#server-selection)
-    - [Select Server by Index](#select-server-by-index)
-      - [Example](#example-1)
-    - [Override Server URL Per-Client](#override-server-url-per-client)
-  - [Custom HTTP Client](#custom-http-client)
-  - [Debugging](#debugging)
-- [Development](#development)
-  - [Maturity](#maturity)
-  - [Contributions](#contributions)
-    - [SDK Created by Speakeasy](#sdk-created-by-speakeasy)
+* [train-travel-sdk](#train-travel-sdk)
+  * [Run in Postman](#run-in-postman)
+  * [SDK Installation](#sdk-installation)
+  * [Requirements](#requirements)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Standalone functions](#standalone-functions)
+  * [File uploads](#file-uploads)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Debugging](#debugging)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
 
 <!-- End Table of Contents [toc] -->
 
@@ -67,25 +57,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add https://github.com/bump-sh-examples/train-travel-sdk-ts
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add https://github.com/bump-sh-examples/train-travel-sdk-ts
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add https://github.com/bump-sh-examples/train-travel-sdk-ts
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add https://github.com/bump-sh-examples/train-travel-sdk-ts zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
