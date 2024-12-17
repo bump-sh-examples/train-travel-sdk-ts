@@ -7,6 +7,8 @@ info:
     before: ""
     type: speakeasy-modifications
 actions:
+  - target: $["x-topics"]
+    remove: true
   - target: $["paths"]["/bookings/{bookingId}"]["delete"]
     update:
       x-speakeasy-name-override: delete
