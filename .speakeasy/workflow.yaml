@@ -12,6 +12,9 @@ targets:
     train-travel-sdk:
         target: typescript
         source: Train Travel API
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/protectearth/protectearth/train-travel-api-typescript-code-samples
