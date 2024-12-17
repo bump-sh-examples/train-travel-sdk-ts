@@ -6,6 +6,7 @@ permissions:
   statuses: write
   id-token: write
 "on":
+  # Trigger the workflow manually via the Actions tab > Generate > Run workflow
   workflow_dispatch:
     inputs:
       force:
@@ -15,6 +16,7 @@ permissions:
       set_version:
         description: optionally set a specific SDK version
         type: string
+  # Trigger the workflow daily at midnight
   schedule:
     - cron: 0 0 * * *
 jobs:
@@ -22,7 +24,7 @@ jobs:
     uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
     with:
       force: ${{ github.event.inputs.force }}
-      mode: pr
+      mode: test
       set_version: ${{ github.event.inputs.set_version }}
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
