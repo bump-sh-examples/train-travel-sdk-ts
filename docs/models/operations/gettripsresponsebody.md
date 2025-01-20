@@ -15,7 +15,7 @@ let value: GetTripsResponseBody = {
       destination: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e",
       departureTime: new Date("2024-02-01T10:00:00Z"),
       arrivalTime: new Date("2024-02-01T16:00:00Z"),
-      operator: "SNCF",
+      operator: "Deutsche Bahn",
       price: 50,
     },
   ],
@@ -26,5 +26,5 @@ let value: GetTripsResponseBody = {
 
 | Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `data`                                                               | [components.Trip](../../models/components/trip.md)[]                 | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `data`                                                               | [operations.Data](../../models/operations/data.md)[]                 | :heavy_minus_sign:                                                   | N/A                                                                  |
 | `links`                                                              | [operations.GetTripsLinks](../../models/operations/gettripslinks.md) | :heavy_minus_sign:                                                   | N/A                                                                  |

@@ -7,7 +7,7 @@ The type of entity that holds the account. This can be either `individual` or `c
 ```typescript
 import { AccountType } from "train-travel-sdk/models/operations";
 
-let value: AccountType = "individual";
+let value: AccountType = "company";
 ```
 
 ## Values

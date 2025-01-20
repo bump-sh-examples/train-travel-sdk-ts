@@ -8,12 +8,11 @@ import { BookingPayment } from "train-travel-sdk/models/components";
 let value: BookingPayment = {
   amount: 49.99,
   source: {
-    name: "Francis Bourgeois",
-    number: "4242424242424242",
-    cvc: 123,
-    expMonth: 12,
-    expYear: 2025,
-    addressCountry: "<value>",
+    name: "<value>",
+    number: "<value>",
+    accountType: "individual",
+    bankName: "Starling Bank",
+    country: "Puerto Rico",
   },
 };
 ```

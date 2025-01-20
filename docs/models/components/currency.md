@@ -7,7 +7,7 @@ Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.htm
 ```typescript
 import { Currency } from "train-travel-sdk/models/components";
 
-let value: Currency = "chf";
+let value: Currency = "bam";
 ```
 
 ## Values

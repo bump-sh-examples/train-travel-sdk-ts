@@ -11,7 +11,7 @@ The payment source to take the payment from. This can be a card or a bank accoun
 const value: components.Card = {
   name: "Francis Bourgeois",
   number: "4242424242424242",
-  cvc: 123,
+  cvc: "123",
   expMonth: 12,
   expYear: 2025,
   addressCountry: "<value>",
@@ -24,9 +24,9 @@ const value: components.Card = {
 const value: components.BankAccount = {
   name: "<value>",
   number: "<value>",
-  accountType: "company",
+  accountType: "individual",
   bankName: "Starling Bank",
-  country: "Niue",
+  country: "Bahrain",
 };
 ```
 

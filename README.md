@@ -57,25 +57,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add https://github.com/bump-sh-examples/train-travel-sdk-ts
+npm add train-travel-sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add https://github.com/bump-sh-examples/train-travel-sdk-ts
+pnpm add train-travel-sdk
 ```
 
 ### Bun
 
 ```bash
-bun add https://github.com/bump-sh-examples/train-travel-sdk-ts
+bun add train-travel-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add https://github.com/bump-sh-examples/train-travel-sdk-ts zod
+yarn add train-travel-sdk zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.

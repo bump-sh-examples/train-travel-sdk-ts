@@ -16,6 +16,6 @@ const value: operations.CreateBookingRawResponseBody = {
 ### `Uint8Array`
 
 ```typescript
-const value: Uint8Array = new TextEncoder().encode("0x262691fc5b");
+const value: Uint8Array = new TextEncoder().encode("0xe5AF5cdc4E");
 ```
 

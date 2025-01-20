@@ -6,9 +6,9 @@
 import { Station } from "train-travel-sdk/models/components";
 
 let value: Station = {
-  id: "b2e783e1-c824-4d63-b37a-d8d698862f1d",
-  name: "Berlin Hauptbahnhof",
-  address: "Invalidenstraße 10557 Berlin, Germany",
+  id: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e",
+  name: "Paris Gare du Nord",
+  address: "18 Rue de Dunkerque 75010 Paris, France",
   countryCode: "FR",
   timezone: "Europe/Berlin",
 };

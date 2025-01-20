@@ -1,25 +1,26 @@
 lockVersion: 2.0.0
 id: 479c13a8-a64a-4c55-9513-2c2580a50427
 management:
-  docChecksum: b149800002a5e2638125223936e5cd32
-  docVersion: 1.0.0
-  speakeasyVersion: 1.456.0
-  generationVersion: 2.481.0
-  releaseVersion: 0.1.2
-  configChecksum: 77398f5ed67be95c7ec467269ae9db36
+  docChecksum: d16c4d5c6def724a3ae551e1ded195f5
+  docVersion: 1.2.0
+  speakeasyVersion: 1.469.2
+  generationVersion: 2.493.23
+  releaseVersion: 0.2.0
+  configChecksum: 5f323687ce27bc68502f5add174970d2
   repoURL: https://github.com/bump-sh-examples/train-travel-sdk-ts.git
   installationURL: https://github.com/bump-sh-examples/train-travel-sdk-ts
+  published: true
 features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.11
+    core: 3.18.16
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.11
+    globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
@@ -31,7 +32,7 @@ features:
     sdkHooks: 0.2.0
     unions: 2.85.8
     uploadStreams: 0.1.0
-    webhooks: 1.2.0
+    webhooks: 1.4.1
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -39,7 +40,6 @@ generatedFiles:
   - .eslintrc.cjs
   - .gitattributes
   - .npmignore
-  - CONTRIBUTING.md
   - FUNCTIONS.md
   - RUNTIMES.md
   - USAGE.md
@@ -72,6 +72,7 @@ generatedFiles:
   - docs/models/operations/createbookingrawresponsebody.md
   - docs/models/operations/createbookingrawresponseresult.md
   - docs/models/operations/currency.md
+  - docs/models/operations/data.md
   - docs/models/operations/deletebookingrequest.md
   - docs/models/operations/deletebookingresponse.md
   - docs/models/operations/getbookingbookingsresponsebody.md
@@ -202,6 +203,8 @@ examples:
           origin: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e"
           destination: "b2e783e1-c824-4d63-b37a-d8d698862f1d"
           date: "2024-02-01T09:00:00Z"
+          bicycles: false
+          dogs: false
       responses:
         "200":
           application/json: {"data": [{"id": "ea399ba1-6d95-433f-92d1-83f67b775594", "origin": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "destination": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "departure_time": "2024-02-01T10:00:00Z", "arrival_time": "2024-02-01T16:00:00Z", "operator": "Deutsche Bahn", "price": 50, "bicycles_allowed": true, "dogs_allowed": true}, {"id": "4d67459c-af07-40bb-bb12-178dbb88e09f", "origin": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "destination": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "departure_time": "2024-02-01T12:00:00Z", "arrival_time": "2024-02-01T18:00:00Z", "operator": "SNCF", "price": 50, "bicycles_allowed": true, "dogs_allowed": true}], "links": {"self": "https://api.example.com/trips?origin=efdbb9d1-02c2-4bc3-afb7-6788d8782b1e&destination=b2e783e1-c824-4d63-b37a-d8d698862f1d&date=2024-02-01", "next": "https://api.example.com/trips?origin=efdbb9d1-02c2-4bc3-afb7-6788d8782b1e&destination=b2e783e1-c824-4d63-b37a-d8d698862f1d&date=2024-02-01&page=2"}}
@@ -218,6 +221,7 @@ examples:
     "":
       requestBody:
         application/json: {"trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
+        application/xml: "x-file: example.file"
       responses:
         "201":
           application/json: {"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "trip_id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "passenger_name": "John Doe", "has_bicycle": true, "has_dog": true, "links": {"self": "https://api.example.com/bookings/efdbb9d1-02c2-4bc3-afb7-6788d8782b1e"}}
@@ -244,7 +248,7 @@ examples:
         path:
           bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
       requestBody:
-        application/json: {"amount": 49.99, "currency": "gbp", "source": {"object": "card", "name": "J. Doe", "number": "4242424242424242", "cvc": 123, "exp_month": 12, "exp_year": 2025, "address_line1": "123 Fake Street", "address_line2": "4th Floor", "address_city": "London", "address_country": "gb", "address_post_code": "N12 9XX"}}
+        application/json: {"amount": 49.99, "currency": "gbp", "source": {"object": "card", "name": "J. Doe", "number": "4242424242424242", "cvc": "123", "exp_month": 12, "exp_year": 2025, "address_line1": "123 Fake Street", "address_line2": "4th Floor", "address_city": "London", "address_country": "gb", "address_post_code": "N12 9XX"}}
       responses:
         "200":
           application/json: {"id": "2e3b4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a", "amount": 49.99, "currency": "gbp", "source": {"name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "status": "succeeded", "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb/payment"}}
@@ -262,8 +266,9 @@ examples:
         path:
           bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
       requestBody:
-        application/json: {"amount": 49.99, "source": {"name": "<value>", "number": "<value>", "account_type": "company", "bank_name": "Starling Bank", "country": "Grenada"}}
+        application/json: {"amount": 49.99, "source": {"name": "<value>", "number": "<value>", "account_type": "individual", "bank_name": "Starling Bank", "country": "Brunei Darussalam"}}
       responses:
         "200":
-          application/json: {"amount": 49.99, "source": {"name": "<value>", "number": "<value>", "account_type": "individual", "bank_name": "Starling Bank", "country": "Bonaire, Sint Eustatius and Saba"}, "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
+          application/json: {"amount": 49.99, "source": {"name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
+examplesVersion: 1.0.0
 generatedTests: {}

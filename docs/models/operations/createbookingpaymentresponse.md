@@ -18,7 +18,7 @@ let value: CreateBookingPaymentResponse = {
       number: "<value>",
       accountType: "company",
       bankName: "Starling Bank",
-      country: "Iran",
+      country: "Philippines",
     },
     links: {
       booking:
