@@ -12,9 +12,9 @@ let value: CreateBookingPaymentResponseBody = {
   source: {
     name: "<value>",
     number: "<value>",
-    accountType: "company",
+    accountType: "individual",
     bankName: "Starling Bank",
-    country: "Lebanon",
+    country: "Isle of Man",
   },
   links: {
     booking:

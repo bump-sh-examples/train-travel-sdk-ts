@@ -29,7 +29,7 @@ async function run() {
       source: {
         name: "J. Doe",
         number: "4242424242424242",
-        cvc: 123,
+        cvc: "123",
         expMonth: 12,
         expYear: 2025,
         addressLine1: "123 Fake Street",
@@ -71,7 +71,7 @@ async function run() {
       source: {
         name: "J. Doe",
         number: "4242424242424242",
-        cvc: 123,
+        cvc: "123",
         expMonth: 12,
         expYear: 2025,
         addressLine1: "123 Fake Street",

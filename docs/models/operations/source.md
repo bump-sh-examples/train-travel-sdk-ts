@@ -25,7 +25,7 @@ const value: operations.BankAccount = {
   number: "<value>",
   accountType: "company",
   bankName: "Starling Bank",
-  country: "Micronesia",
+  country: "Niue",
 };
 ```
 

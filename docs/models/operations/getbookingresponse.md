@@ -11,7 +11,7 @@ let value: GetBookingResponse = {
       "<value>",
     ],
   },
-  result: new TextEncoder().encode("0x0e5AF5cdc4"),
+  result: new TextEncoder().encode("0xFe9d06e6d9"),
 };
 ```
 

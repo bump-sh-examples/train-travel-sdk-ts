@@ -12,7 +12,7 @@ let value: BankAccount = {
   number: "<value>",
   accountType: "company",
   bankName: "Starling Bank",
-  country: "Mexico",
+  country: "Mauritius",
 };
 ```
 

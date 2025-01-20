@@ -83,7 +83,7 @@ export type Card = {
   /**
    * Card security code, 3 or 4 digits usually found on the back of the card.
    */
-  cvc: number;
+  cvc: string;
   /**
    * Two-digit number representing the card's expiration month.
    */
@@ -243,7 +243,7 @@ export const Card$inboundSchema: z.ZodType<Card, z.ZodTypeDef, unknown> = z
     object: z.literal("card").optional(),
     name: z.string(),
     number: z.string(),
-    cvc: z.number().int(),
+    cvc: z.string(),
     exp_month: z.number().int(),
     exp_year: z.number().int(),
     address_line1: z.string().optional(),
@@ -268,7 +268,7 @@ export type Card$Outbound = {
   object: "card";
   name: string;
   number: string;
-  cvc: number;
+  cvc: string;
   exp_month: number;
   exp_year: number;
   address_line1?: string | undefined;
@@ -284,7 +284,7 @@ export const Card$outboundSchema: z.ZodType<Card$Outbound, z.ZodTypeDef, Card> =
     object: z.literal("card").default("card" as const),
     name: z.string(),
     number: z.string(),
-    cvc: z.number().int(),
+    cvc: z.string(),
     expMonth: z.number().int(),
     expYear: z.number().int(),
     addressLine1: z.string().optional(),

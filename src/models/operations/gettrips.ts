@@ -55,6 +55,49 @@ export type GetTripsTripsResponseBody = {
   links?: GetTripsTripsLinks | undefined;
 };
 
+/**
+ * The link to the destination station resource.
+ */
+export type Data = {
+  /**
+   * Unique identifier for the trip
+   */
+  id?: string | undefined;
+  /**
+   * The starting station of the trip
+   */
+  origin?: string | undefined;
+  /**
+   * The destination station of the trip
+   */
+  destination?: string | undefined;
+  /**
+   * The date and time when the trip departs
+   */
+  departureTime?: Date | undefined;
+  /**
+   * The date and time when the trip arrives
+   */
+  arrivalTime?: Date | undefined;
+  /**
+   * The name of the operator of the trip
+   */
+  operator?: string | undefined;
+  /**
+   * The cost of the trip
+   */
+  price?: number | undefined;
+  /**
+   * Indicates whether bicycles are allowed on the trip
+   */
+  bicyclesAllowed?: boolean | undefined;
+  /**
+   * Indicates whether dogs are allowed on the trip
+   */
+  dogsAllowed?: boolean | undefined;
+  self?: string | undefined;
+};
+
 export type GetTripsLinks = {
   self?: string | undefined;
   next?: string | undefined;
@@ -65,7 +108,7 @@ export type GetTripsLinks = {
  * This is a generic request/response wrapper which contains both data and links which serve as hypermedia controls (HATEOAS).
  */
 export type GetTripsResponseBody = {
-  data?: Array<components.Trip> | undefined;
+  data?: Array<Data> | undefined;
   links?: GetTripsLinks | undefined;
 };
 
@@ -264,6 +307,95 @@ export function getTripsTripsResponseBodyFromJSON(
 }
 
 /** @internal */
+export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.string().optional(),
+    origin: z.string().optional(),
+    destination: z.string().optional(),
+    departure_time: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    arrival_time: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    operator: z.string().optional(),
+    price: z.number().optional(),
+    bicycles_allowed: z.boolean().optional(),
+    dogs_allowed: z.boolean().optional(),
+    self: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "departure_time": "departureTime",
+      "arrival_time": "arrivalTime",
+      "bicycles_allowed": "bicyclesAllowed",
+      "dogs_allowed": "dogsAllowed",
+    });
+  });
+
+/** @internal */
+export type Data$Outbound = {
+  id?: string | undefined;
+  origin?: string | undefined;
+  destination?: string | undefined;
+  departure_time?: string | undefined;
+  arrival_time?: string | undefined;
+  operator?: string | undefined;
+  price?: number | undefined;
+  bicycles_allowed?: boolean | undefined;
+  dogs_allowed?: boolean | undefined;
+  self?: string | undefined;
+};
+
+/** @internal */
+export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
+  z.object({
+    id: z.string().optional(),
+    origin: z.string().optional(),
+    destination: z.string().optional(),
+    departureTime: z.date().transform(v => v.toISOString()).optional(),
+    arrivalTime: z.date().transform(v => v.toISOString()).optional(),
+    operator: z.string().optional(),
+    price: z.number().optional(),
+    bicyclesAllowed: z.boolean().optional(),
+    dogsAllowed: z.boolean().optional(),
+    self: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      departureTime: "departure_time",
+      arrivalTime: "arrival_time",
+      bicyclesAllowed: "bicycles_allowed",
+      dogsAllowed: "dogs_allowed",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Data$ {
+  /** @deprecated use `Data$inboundSchema` instead. */
+  export const inboundSchema = Data$inboundSchema;
+  /** @deprecated use `Data$outboundSchema` instead. */
+  export const outboundSchema = Data$outboundSchema;
+  /** @deprecated use `Data$Outbound` instead. */
+  export type Outbound = Data$Outbound;
+}
+
+export function dataToJSON(data: Data): string {
+  return JSON.stringify(Data$outboundSchema.parse(data));
+}
+
+export function dataFromJSON(
+  jsonString: string,
+): SafeParseResult<Data, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetTripsLinks$inboundSchema: z.ZodType<
   GetTripsLinks,
   z.ZodTypeDef,
@@ -325,13 +457,13 @@ export const GetTripsResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.array(components.Trip$inboundSchema).optional(),
+  data: z.array(z.lazy(() => Data$inboundSchema)).optional(),
   links: z.lazy(() => GetTripsLinks$inboundSchema).optional(),
 });
 
 /** @internal */
 export type GetTripsResponseBody$Outbound = {
-  data?: Array<components.Trip$Outbound> | undefined;
+  data?: Array<Data$Outbound> | undefined;
   links?: GetTripsLinks$Outbound | undefined;
 };
 
@@ -341,7 +473,7 @@ export const GetTripsResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetTripsResponseBody
 > = z.object({
-  data: z.array(components.Trip$outboundSchema).optional(),
+  data: z.array(z.lazy(() => Data$outboundSchema)).optional(),
   links: z.lazy(() => GetTripsLinks$outboundSchema).optional(),
 });
 

@@ -5,6 +5,7 @@
 import { TrainTravelSDKCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -62,11 +63,11 @@ export async function bookingsCreateJson(
 
   const path = pathToFunc("/bookings")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: options?.acceptHeaderOverride
       || "application/json;q=1, application/xml;q=0",
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.oAuth2);
   const securityInput = secConfig == null ? {} : { oAuth2: secConfig };
@@ -81,8 +82,18 @@ export async function bookingsCreateJson(
     securitySource: client._options.oAuth2,
     retryConfig: options?.retries
       || client._options.retryConfig
+      || {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 500,
+          maxInterval: 60000,
+          exponent: 1.5,
+          maxElapsedTime: 3600000,
+        },
+        retryConnectionErrors: true,
+      }
       || { strategy: "none" },
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryCodes: options?.retryCodes || ["5XX"],
   };
 
   const requestRes = client._createRequest(context, {
@@ -131,8 +142,10 @@ export async function bookingsCreateJson(
       ctype: "application/xml",
       key: "Result",
     }),
-    M.fail([400, 401, 404, 409, 429, 500]),
-    M.fail(["4XX", "5XX"]),
+    M.fail([400, 401, 404, 409, 429]),
+    M.fail(500),
+    M.fail("4XX"),
+    M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
     return result;

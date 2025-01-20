@@ -7,7 +7,7 @@ The status of the payment, one of `pending`, `succeeded`, or `failed`.
 ```typescript
 import { Status } from "train-travel-sdk/models/operations";
 
-let value: Status = "failed";
+let value: Status = "succeeded";
 ```
 
 ## Values
