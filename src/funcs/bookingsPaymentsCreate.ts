@@ -10,7 +10,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,8 +17,11 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { TrainTravelSDKError } from "../models/errors/traintravelsdkerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -28,21 +30,49 @@ import { Result } from "../types/fp.js";
  * @remarks
  * A payment is an attempt to pay for the booking, which will confirm the booking for the user and enable them to get their tickets.
  */
-export async function bookingsPaymentsCreate(
+export function bookingsPaymentsCreate(
+  client: TrainTravelSDKCore,
+  request: operations.CreateBookingPaymentRequest,
+  options?: RequestOptions,
+): APIPromise<
+  Result<
+    operations.CreateBookingPaymentResponse,
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
+  >
+> {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
   client: TrainTravelSDKCore,
   request: operations.CreateBookingPaymentRequest,
   options?: RequestOptions,
 ): Promise<
-  Result<
-    operations.CreateBookingPaymentResponse,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
-    | RequestAbortedError
-    | RequestTimeoutError
-    | ConnectionError
-  >
+  [
+    Result<
+      operations.CreateBookingPaymentResponse,
+      | TrainTravelSDKError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    APICall,
+  ]
 > {
   const parsed = safeParse(
     request,
@@ -51,7 +81,7 @@ export async function bookingsPaymentsCreate(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.BookingPayment, { explode: true });
@@ -75,6 +105,8 @@ export async function bookingsPaymentsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "create-booking-payment",
     oAuth2Scopes: [],
 
@@ -104,10 +136,11 @@ export async function bookingsPaymentsCreate(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -118,7 +151,7 @@ export async function bookingsPaymentsCreate(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -128,13 +161,14 @@ export async function bookingsPaymentsCreate(
 
   const [result] = await M.match<
     operations.CreateBookingPaymentResponse,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.json(200, operations.CreateBookingPaymentResponse$inboundSchema, {
       hdrs: true,
@@ -144,10 +178,10 @@ export async function bookingsPaymentsCreate(
     M.fail(500),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

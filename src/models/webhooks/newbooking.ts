@@ -8,12 +8,18 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Links to the next and previous pages of a paginated response.
+ */
 export type Links = {
   self?: string | undefined;
   next?: string | undefined;
   prev?: string | undefined;
 };
 
+/**
+ * A booking for a train trip.
+ */
 export type NewBookingRequestBody = {
   /**
    * Identifier of the booked trip

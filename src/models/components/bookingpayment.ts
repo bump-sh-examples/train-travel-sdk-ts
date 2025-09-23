@@ -102,8 +102,11 @@ export type Card = {
 /**
  * The payment source to take the payment from. This can be a card or a bank account. Some of these properties will be hidden on read to protect PII leaking.
  */
-export type Source = BankAccount | Card;
+export type Source = Card | BankAccount;
 
+/**
+ * A payment for a booking.
+ */
 export type BookingPayment = {
   /**
    * Amount intended to be collected by this payment. A positive decimal figure describing the amount to be collected.
@@ -116,7 +119,7 @@ export type BookingPayment = {
   /**
    * The payment source to take the payment from. This can be a card or a bank account. Some of these properties will be hidden on read to protect PII leaking.
    */
-  source?: BankAccount | Card | undefined;
+  source?: Card | BankAccount | undefined;
 };
 
 /** @internal */
@@ -163,7 +166,7 @@ export const BankAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: z.literal("bank_account").optional(),
+  object: z.literal("bank_account").default("bank_account").optional(),
   name: z.string(),
   number: z.string(),
   sort_code: z.string().optional(),
@@ -240,7 +243,7 @@ export function bankAccountFromJSON(
 /** @internal */
 export const Card$inboundSchema: z.ZodType<Card, z.ZodTypeDef, unknown> = z
   .object({
-    object: z.literal("card").optional(),
+    object: z.literal("card").default("card").optional(),
     name: z.string(),
     number: z.string(),
     cvc: z.string(),
@@ -334,12 +337,12 @@ export function cardFromJSON(
 /** @internal */
 export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> = z
   .union([
-    z.lazy(() => BankAccount$inboundSchema),
     z.lazy(() => Card$inboundSchema),
+    z.lazy(() => BankAccount$inboundSchema),
   ]);
 
 /** @internal */
-export type Source$Outbound = BankAccount$Outbound | Card$Outbound;
+export type Source$Outbound = Card$Outbound | BankAccount$Outbound;
 
 /** @internal */
 export const Source$outboundSchema: z.ZodType<
@@ -347,8 +350,8 @@ export const Source$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Source
 > = z.union([
-  z.lazy(() => BankAccount$outboundSchema),
   z.lazy(() => Card$outboundSchema),
+  z.lazy(() => BankAccount$outboundSchema),
 ]);
 
 /**
@@ -387,8 +390,8 @@ export const BookingPayment$inboundSchema: z.ZodType<
   amount: z.number().optional(),
   currency: Currency$inboundSchema.optional(),
   source: z.union([
-    z.lazy(() => BankAccount$inboundSchema),
     z.lazy(() => Card$inboundSchema),
+    z.lazy(() => BankAccount$inboundSchema),
   ]).optional(),
 });
 
@@ -396,7 +399,7 @@ export const BookingPayment$inboundSchema: z.ZodType<
 export type BookingPayment$Outbound = {
   amount?: number | undefined;
   currency?: string | undefined;
-  source?: BankAccount$Outbound | Card$Outbound | undefined;
+  source?: Card$Outbound | BankAccount$Outbound | undefined;
 };
 
 /** @internal */
@@ -408,8 +411,8 @@ export const BookingPayment$outboundSchema: z.ZodType<
   amount: z.number().optional(),
   currency: Currency$outboundSchema.optional(),
   source: z.union([
-    z.lazy(() => BankAccount$outboundSchema),
     z.lazy(() => Card$outboundSchema),
+    z.lazy(() => BankAccount$outboundSchema),
   ]).optional(),
 });
 

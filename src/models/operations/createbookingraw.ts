@@ -11,7 +11,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Booking successful
+ * A booking for a train trip.
  */
 export type CreateBookingRawBookingsResponseBody = {
   /**
@@ -34,11 +34,14 @@ export type CreateBookingRawBookingsResponseBody = {
    * Indicates whether the passenger has a dog.
    */
   hasDog?: boolean | undefined;
+  /**
+   * The link to the current resource.
+   */
   links?: components.LinksSelf | undefined;
 };
 
 /**
- * Booking successful
+ * A booking for a train trip.
  */
 export type CreateBookingRawResponseBody = {
   /**
@@ -61,6 +64,9 @@ export type CreateBookingRawResponseBody = {
    * Indicates whether the passenger has a dog.
    */
   hasDog?: boolean | undefined;
+  /**
+   * The link to the current resource.
+   */
   links?: components.LinksSelf | undefined;
 };
 

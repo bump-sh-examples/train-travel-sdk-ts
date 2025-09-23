@@ -6,10 +6,8 @@
 import { GetStationsRequest } from "train-travel-sdk/models/operations";
 
 let value: GetStationsRequest = {
-  page: 1,
-  limit: 10,
   coordinates: "52.5200,13.4050",
-  search: "Paris",
+  search: "Milano Centrale",
   country: "DE",
 };
 ```

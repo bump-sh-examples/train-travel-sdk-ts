@@ -15,6 +15,9 @@ export type CreateBookingPaymentRequest = {
    * The ID of the booking to pay for.
    */
   bookingId: string;
+  /**
+   * Payment details
+   */
   bookingPayment: components.BookingPayment;
 };
 
@@ -105,7 +108,7 @@ export type Card = {
 /**
  * The payment source to take the payment from. This can be a card or a bank account. Some of these properties will be hidden on read to protect PII leaking.
  */
-export type Source = BankAccount | Card;
+export type Source = Card | BankAccount;
 
 /**
  * The status of the payment, one of `pending`, `succeeded`, or `failed`.
@@ -121,7 +124,7 @@ export const Status = {
 export type Status = ClosedEnum<typeof Status>;
 
 /**
- * Payment successful
+ * A payment for a booking.
  */
 export type CreateBookingPaymentResponseBody = {
   /**
@@ -139,11 +142,14 @@ export type CreateBookingPaymentResponseBody = {
   /**
    * The payment source to take the payment from. This can be a card or a bank account. Some of these properties will be hidden on read to protect PII leaking.
    */
-  source?: BankAccount | Card | undefined;
+  source?: Card | BankAccount | undefined;
   /**
    * The status of the payment, one of `pending`, `succeeded`, or `failed`.
    */
   status?: Status | undefined;
+  /**
+   * The link to the booking resource.
+   */
   links?: components.LinksBooking | undefined;
 };
 
@@ -263,7 +269,7 @@ export const BankAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: z.literal("bank_account").optional(),
+  object: z.literal("bank_account").default("bank_account").optional(),
   name: z.string(),
   number: z.string(),
   sort_code: z.string().optional(),
@@ -340,7 +346,7 @@ export function bankAccountFromJSON(
 /** @internal */
 export const Card$inboundSchema: z.ZodType<Card, z.ZodTypeDef, unknown> = z
   .object({
-    object: z.literal("card").optional(),
+    object: z.literal("card").default("card").optional(),
     name: z.string(),
     number: z.string(),
     exp_month: z.number().int(),
@@ -421,12 +427,12 @@ export function cardFromJSON(
 /** @internal */
 export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> = z
   .union([
-    z.lazy(() => BankAccount$inboundSchema),
     z.lazy(() => Card$inboundSchema),
+    z.lazy(() => BankAccount$inboundSchema),
   ]);
 
 /** @internal */
-export type Source$Outbound = BankAccount$Outbound | Card$Outbound;
+export type Source$Outbound = Card$Outbound | BankAccount$Outbound;
 
 /** @internal */
 export const Source$outboundSchema: z.ZodType<
@@ -434,8 +440,8 @@ export const Source$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Source
 > = z.union([
-  z.lazy(() => BankAccount$outboundSchema),
   z.lazy(() => Card$outboundSchema),
+  z.lazy(() => BankAccount$outboundSchema),
 ]);
 
 /**
@@ -494,8 +500,8 @@ export const CreateBookingPaymentResponseBody$inboundSchema: z.ZodType<
   amount: z.number().optional(),
   currency: Currency$inboundSchema.optional(),
   source: z.union([
-    z.lazy(() => BankAccount$inboundSchema),
     z.lazy(() => Card$inboundSchema),
+    z.lazy(() => BankAccount$inboundSchema),
   ]).optional(),
   status: Status$inboundSchema.optional(),
   links: components.LinksBooking$inboundSchema.optional(),
@@ -506,7 +512,7 @@ export type CreateBookingPaymentResponseBody$Outbound = {
   id?: string | undefined;
   amount?: number | undefined;
   currency?: string | undefined;
-  source?: BankAccount$Outbound | Card$Outbound | undefined;
+  source?: Card$Outbound | BankAccount$Outbound | undefined;
   status?: string | undefined;
   links?: components.LinksBooking$Outbound | undefined;
 };
@@ -521,8 +527,8 @@ export const CreateBookingPaymentResponseBody$outboundSchema: z.ZodType<
   amount: z.number().optional(),
   currency: Currency$outboundSchema.optional(),
   source: z.union([
-    z.lazy(() => BankAccount$outboundSchema),
     z.lazy(() => Card$outboundSchema),
+    z.lazy(() => BankAccount$outboundSchema),
   ]).optional(),
   status: Status$outboundSchema.optional(),
   links: components.LinksBooking$outboundSchema.optional(),

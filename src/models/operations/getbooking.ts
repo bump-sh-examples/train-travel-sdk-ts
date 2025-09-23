@@ -18,7 +18,7 @@ export type GetBookingRequest = {
 };
 
 /**
- * The booking details
+ * A booking for a train trip.
  */
 export type GetBookingBookingsResponseBody = {
   /**
@@ -41,11 +41,14 @@ export type GetBookingBookingsResponseBody = {
    * Indicates whether the passenger has a dog.
    */
   hasDog?: boolean | undefined;
+  /**
+   * The link to the current resource.
+   */
   links?: components.LinksSelf | undefined;
 };
 
 /**
- * The booking details
+ * A booking for a train trip.
  */
 export type GetBookingResponseBody = {
   /**
@@ -68,6 +71,9 @@ export type GetBookingResponseBody = {
    * Indicates whether the passenger has a dog.
    */
   hasDog?: boolean | undefined;
+  /**
+   * The link to the current resource.
+   */
   links?: components.LinksSelf | undefined;
 };
 

@@ -1,6 +1,6 @@
 # CreateBookingPaymentResponseBody
 
-Payment successful
+A payment for a booking.
 
 ## Example Usage
 
@@ -10,11 +10,11 @@ import { CreateBookingPaymentResponseBody } from "train-travel-sdk/models/operat
 let value: CreateBookingPaymentResponseBody = {
   amount: 49.99,
   source: {
-    name: "<value>",
-    number: "<value>",
-    accountType: "individual",
-    bankName: "Starling Bank",
-    country: "Isle of Man",
+    name: "Francis Bourgeois",
+    number: "4242424242424242",
+    expMonth: 12,
+    expYear: 2025,
+    addressCountry: "<value>",
   },
   links: {
     booking:
@@ -32,4 +32,4 @@ let value: CreateBookingPaymentResponseBody = {
 | `currency`                                                                                                                                                 | [operations.Currency](../../models/operations/currency.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                         | Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.                                                          |                                                                                                                                                            |
 | `source`                                                                                                                                                   | *operations.Source*                                                                                                                                        | :heavy_minus_sign:                                                                                                                                         | The payment source to take the payment from. This can be a card or a bank account. Some of these properties will be hidden on read to protect PII leaking. |                                                                                                                                                            |
 | `status`                                                                                                                                                   | [operations.Status](../../models/operations/status.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                         | The status of the payment, one of `pending`, `succeeded`, or `failed`.                                                                                     |                                                                                                                                                            |
-| `links`                                                                                                                                                    | [components.LinksBooking](../../models/components/linksbooking.md)                                                                                         | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |                                                                                                                                                            |
+| `links`                                                                                                                                                    | [components.LinksBooking](../../models/components/linksbooking.md)                                                                                         | :heavy_minus_sign:                                                                                                                                         | The link to the booking resource.                                                                                                                          |                                                                                                                                                            |

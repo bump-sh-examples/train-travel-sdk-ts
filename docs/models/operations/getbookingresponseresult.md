@@ -16,6 +16,6 @@ const value: operations.GetBookingResponseBody = {
 ### `Uint8Array`
 
 ```typescript
-const value: Uint8Array = new TextEncoder().encode("0xCf6B8DcDff");
+const value: Uint8Array = new TextEncoder().encode("0xdC7D3f4be0");
 ```
 

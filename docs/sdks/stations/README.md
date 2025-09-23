@@ -17,6 +17,7 @@ Returns a paginated and searchable list of all train stations.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-stations" method="get" path="/stations" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -26,14 +27,11 @@ const trainTravelSDK = new TrainTravelSDK({
 
 async function run() {
   const result = await trainTravelSDK.stations.list({
-    page: 1,
-    limit: 10,
     coordinates: "52.5200,13.4050",
-    search: "Paris",
+    search: "Milano Centrale",
     country: "DE",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -56,21 +54,16 @@ const trainTravelSDK = new TrainTravelSDKCore({
 
 async function run() {
   const res = await stationsList(trainTravelSDK, {
-    page: 1,
-    limit: 10,
     coordinates: "52.5200,13.4050",
-    search: "Paris",
+    search: "Milano Centrale",
     country: "DE",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("stationsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

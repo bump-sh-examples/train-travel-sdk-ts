@@ -41,6 +41,9 @@ export type GetTripsRequest = {
   dogs?: boolean | undefined;
 };
 
+/**
+ * Links to the next and previous pages of a paginated response.
+ */
 export type GetTripsTripsLinks = {
   self?: string | undefined;
   next?: string | undefined;
@@ -98,6 +101,9 @@ export type Data = {
   self?: string | undefined;
 };
 
+/**
+ * Links to the next and previous pages of a paginated response.
+ */
 export type GetTripsLinks = {
   self?: string | undefined;
   next?: string | undefined;

@@ -13,6 +13,7 @@ A payment is an attempt to pay for the booking, which will confirm the booking f
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create-booking-payment" method="post" path="/bookings/{bookingId}/payment" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -27,6 +28,7 @@ async function run() {
       amount: 49.99,
       currency: "gbp",
       source: {
+        object: "card",
         name: "J. Doe",
         number: "4242424242424242",
         cvc: "123",
@@ -41,7 +43,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -69,6 +70,7 @@ async function run() {
       amount: 49.99,
       currency: "gbp",
       source: {
+        object: "card",
         name: "J. Doe",
         number: "4242424242424242",
         cvc: "123",
@@ -82,15 +84,12 @@ async function run() {
       },
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingsPaymentsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

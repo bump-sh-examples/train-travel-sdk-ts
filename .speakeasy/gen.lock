@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 479c13a8-a64a-4c55-9513-2c2580a50427
 management:
-  docChecksum: d16c4d5c6def724a3ae551e1ded195f5
-  docVersion: 1.2.0
-  speakeasyVersion: 1.469.2
-  generationVersion: 2.493.23
-  releaseVersion: 0.2.0
-  configChecksum: 5f323687ce27bc68502f5add174970d2
+  docChecksum: 4a84054fc9097855193f0c84047734a2
+  docVersion: 1.2.1
+  speakeasyVersion: 1.622.1
+  generationVersion: 2.709.0
+  releaseVersion: 0.3.0
+  configChecksum: 6d9d80782a1269fca275e9de8105513f
   repoURL: https://github.com/bump-sh-examples/train-travel-sdk-ts.git
   installationURL: https://github.com/bump-sh-examples/train-travel-sdk-ts
   published: true
@@ -14,30 +14,29 @@ features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.11
-    core: 3.18.16
+    constsAndDefaults: 0.1.12
+    core: 3.21.23
     defaultEnabledRetries: 0.1.0
-    devContainers: 2.90.0
+    devContainers: 2.90.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.12
+    globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.4
+    globalServerURLs: 2.82.5
     groups: 2.81.2
     inputOutputModels: 2.82.0
     nameOverrides: 2.81.2
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.2.0
-    unions: 2.85.8
+    sdkHooks: 0.3.0
+    unions: 2.85.11
     uploadStreams: 0.1.0
-    webhooks: 1.4.1
+    webhooks: 1.5.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
   - .devcontainer/setup.sh
-  - .eslintrc.cjs
   - .gitattributes
   - .npmignore
   - FUNCTIONS.md
@@ -110,6 +109,11 @@ generatedFiles:
   - docs/sdks/stations/README.md
   - docs/sdks/traintravelsdk/README.md
   - docs/sdks/trips/README.md
+  - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/package.json
+  - examples/stationsList.example.ts
   - jsr.json
   - package.json
   - src/core.ts
@@ -153,7 +157,9 @@ generatedFiles:
   - src/models/errors/apierror.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
+  - src/models/errors/responsevalidationerror.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/traintravelsdkerror.ts
   - src/models/operations/createbookingjson.ts
   - src/models/operations/createbookingpayment.ts
   - src/models/operations/createbookingraw.ts
@@ -171,6 +177,7 @@ generatedFiles:
   - src/sdk/sdk.ts
   - src/sdk/stations.ts
   - src/sdk/trips.ts
+  - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -183,19 +190,20 @@ generatedFiles:
   - tsconfig.json
 examples:
   get-stations:
-    "":
+    speakeasy-default-get-stations:
       parameters:
         query:
           page: 1
           limit: 10
           coordinates: "52.5200,13.4050"
-          search: "Paris"
+          search: "Milano Centrale"
           country: "DE"
       responses:
         "200":
-          application/json: {"data": [{"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "name": "Berlin Hauptbahnhof", "address": "Invalidenstraße 10557 Berlin, Germany", "country_code": "DE", "timezone": "Europe/Berlin"}, {"id": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "name": "Paris Gare du Nord", "address": "18 Rue de Dunkerque 75010 Paris, France", "country_code": "FR", "timezone": "Europe/Paris"}], "links": {"self": "https://api.example.com/stations&page=2", "next": "https://api.example.com/stations?page=3", "prev": "https://api.example.com/stations?page=1"}}
+          application/json: {"data": [{"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "name": "Berlin Hauptbahnhof", "address": "Invalidenstraße 10557 Berlin, Germany", "country_code": "DE", "timezone": "Europe/Berlin"}]}
+          application/xml: "0x293b1DEa21"
   get-trips:
-    "":
+    speakeasy-default-get-trips:
       parameters:
         query:
           page: 1
@@ -207,41 +215,51 @@ examples:
           dogs: false
       responses:
         "200":
-          application/json: {"data": [{"id": "ea399ba1-6d95-433f-92d1-83f67b775594", "origin": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "destination": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "departure_time": "2024-02-01T10:00:00Z", "arrival_time": "2024-02-01T16:00:00Z", "operator": "Deutsche Bahn", "price": 50, "bicycles_allowed": true, "dogs_allowed": true}, {"id": "4d67459c-af07-40bb-bb12-178dbb88e09f", "origin": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "destination": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "departure_time": "2024-02-01T12:00:00Z", "arrival_time": "2024-02-01T18:00:00Z", "operator": "SNCF", "price": 50, "bicycles_allowed": true, "dogs_allowed": true}], "links": {"self": "https://api.example.com/trips?origin=efdbb9d1-02c2-4bc3-afb7-6788d8782b1e&destination=b2e783e1-c824-4d63-b37a-d8d698862f1d&date=2024-02-01", "next": "https://api.example.com/trips?origin=efdbb9d1-02c2-4bc3-afb7-6788d8782b1e&destination=b2e783e1-c824-4d63-b37a-d8d698862f1d&date=2024-02-01&page=2"}}
+          application/json: {"data": [{"id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "origin": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "destination": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "departure_time": "2024-02-01T10:00:00Z", "arrival_time": "2024-02-01T16:00:00Z", "operator": "Deutsche Bahn", "price": 50}]}
+          application/xml: "0x6A4f64db8E"
   get-bookings:
-    "":
+    speakeasy-default-get-bookings:
       parameters:
         query:
           page: 1
           limit: 10
       responses:
         "200":
-          application/json: {"data": [{"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "trip_id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "passenger_name": "John Doe", "has_bicycle": true, "has_dog": true}, {"id": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "Jane Smith", "has_bicycle": false, "has_dog": false}], "links": {"self": "https://api.example.com/bookings", "next": "https://api.example.com/bookings?page=2"}}
+          application/json: {"data": [{"id": "3f3e3e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}]}
+          application/xml: "0x3Ad8BBcDf1"
   create-booking:
-    "":
+    speakeasy-default-create-booking-json:
       requestBody:
         application/json: {"trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
+      responses:
+        "201":
+          application/json: {"id": "3f3e3e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
+          application/xml: "0xdA1F458b0c"
+    speakeasy-default-create-booking-raw:
+      requestBody:
         application/xml: "x-file: example.file"
       responses:
         "201":
-          application/json: {"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "trip_id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "passenger_name": "John Doe", "has_bicycle": true, "has_dog": true, "links": {"self": "https://api.example.com/bookings/efdbb9d1-02c2-4bc3-afb7-6788d8782b1e"}}
+          application/json: {"id": "3f3e3e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
+          application/xml: "0xdA1F458b0c"
   get-booking:
-    "":
+    speakeasy-default-get-booking:
       parameters:
         path:
           bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
       responses:
         "200":
-          application/json: {"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "trip_id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "passenger_name": "John Doe", "has_bicycle": true, "has_dog": true, "links": {"self": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
+          application/json: {"id": "3f3e3e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
+          application/xml: "0x3D031c7224"
   delete-booking:
-    "":
+    speakeasy-default-delete-booking:
       parameters:
         path:
           bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
   new-booking:
-    "":
+    speakeasy-default-new-booking:
       requestBody:
-        application/json: {"trip_id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "passenger_name": "John Doe", "has_bicycle": true, "has_dog": true, "links": {"self": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
+        application/json: {"trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
   create-booking-payment:
     Card:
       parameters:
@@ -251,7 +269,7 @@ examples:
         application/json: {"amount": 49.99, "currency": "gbp", "source": {"object": "card", "name": "J. Doe", "number": "4242424242424242", "cvc": "123", "exp_month": 12, "exp_year": 2025, "address_line1": "123 Fake Street", "address_line2": "4th Floor", "address_city": "London", "address_country": "gb", "address_post_code": "N12 9XX"}}
       responses:
         "200":
-          application/json: {"id": "2e3b4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a", "amount": 49.99, "currency": "gbp", "source": {"name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "status": "succeeded", "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb/payment"}}
+          application/json: {"id": "2e3b4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a", "amount": 49.99, "currency": "gbp", "source": {"object": "card", "name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "status": "succeeded", "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb/payment"}}
     Bank:
       parameters:
         path:
@@ -261,14 +279,14 @@ examples:
       responses:
         "200":
           application/json: {"id": "2e3b4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a", "amount": 100.5, "currency": "gbp", "source": {"object": "bank_account", "name": "J. Doe", "number": "*********2345", "sort_code": "000123", "account_type": "individual", "bank_name": "Starling Bank", "country": "gb"}, "status": "succeeded", "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
-    "":
+    speakeasy-default-create-booking-payment:
       parameters:
         path:
           bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
       requestBody:
-        application/json: {"amount": 49.99, "source": {"name": "<value>", "number": "<value>", "account_type": "individual", "bank_name": "Starling Bank", "country": "Brunei Darussalam"}}
+        application/json: {"amount": 49.99, "source": {"object": "card", "name": "Francis Bourgeois", "number": "4242424242424242", "cvc": "123", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}}
       responses:
         "200":
-          application/json: {"amount": 49.99, "source": {"name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
-examplesVersion: 1.0.0
+          application/json: {"amount": 49.99, "source": {"object": "card", "name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
+examplesVersion: 1.0.2
 generatedTests: {}

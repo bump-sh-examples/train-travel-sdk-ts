@@ -21,6 +21,7 @@ Returns a list of all trip bookings by the authenticated user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-bookings" method="get" path="/bookings" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -29,12 +30,8 @@ const trainTravelSDK = new TrainTravelSDK({
 });
 
 async function run() {
-  const result = await trainTravelSDK.bookings.list({
-    page: 1,
-    limit: 10,
-  });
+  const result = await trainTravelSDK.bookings.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -56,19 +53,13 @@ const trainTravelSDK = new TrainTravelSDKCore({
 });
 
 async function run() {
-  const res = await bookingsList(trainTravelSDK, {
-    page: 1,
-    limit: 10,
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await bookingsList(trainTravelSDK, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -99,6 +90,7 @@ A booking is a temporary hold on a trip. It is not confirmed until the payment i
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create-booking_json" method="post" path="/bookings" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -112,7 +104,6 @@ async function run() {
     passengerName: "John Doe",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -138,15 +129,12 @@ async function run() {
     tripId: "4f4e4e1-c824-4d63-b37a-d8d698862f1d",
     passengerName: "John Doe",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingsCreateJson failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -177,6 +165,7 @@ A booking is a temporary hold on a trip. It is not confirmed until the payment i
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create-booking_raw" method="post" path="/bookings" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -185,9 +174,8 @@ const trainTravelSDK = new TrainTravelSDK({
 });
 
 async function run() {
-  const result = await trainTravelSDK.bookings.createRaw(bytesToStream(new TextEncoder().encode("0x6f39dACC0a")));
+  const result = await trainTravelSDK.bookings.createRaw(bytesToStream(new TextEncoder().encode("{\"trip_id\":\"4f4e4e1-c824-4d63-b37a-d8d698862f1d\",\"passenger_name\":\"John Doe\"}")));
 
-  // Handle the result
   console.log(result);
 }
 
@@ -209,16 +197,13 @@ const trainTravelSDK = new TrainTravelSDKCore({
 });
 
 async function run() {
-  const res = await bookingsCreateRaw(trainTravelSDK, bytesToStream(new TextEncoder().encode("0x9Ddb88478b")));
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await bookingsCreateRaw(trainTravelSDK, bytesToStream(new TextEncoder().encode("{\"trip_id\":\"4f4e4e1-c824-4d63-b37a-d8d698862f1d\",\"passenger_name\":\"John Doe\"}")));
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingsCreateRaw failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -249,6 +234,7 @@ Returns the details of a specific booking.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-booking" method="get" path="/bookings/{bookingId}" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -261,7 +247,6 @@ async function run() {
     bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -286,15 +271,12 @@ async function run() {
   const res = await bookingsGet(trainTravelSDK, {
     bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -325,6 +307,7 @@ Deletes a booking, cancelling the hold on the trip.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-booking" method="delete" path="/bookings/{bookingId}" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -337,7 +320,6 @@ async function run() {
     bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -362,15 +344,12 @@ async function run() {
   const res = await bookingsDelete(trainTravelSDK, {
     bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -21,6 +21,9 @@ export type GetBookingsRequest = {
   limit?: number | undefined;
 };
 
+/**
+ * Links to the next and previous pages of a paginated response.
+ */
 export type GetBookingsBookingsLinks = {
   self?: string | undefined;
   next?: string | undefined;
@@ -35,6 +38,9 @@ export type GetBookingsBookingsResponseBody = {
   links?: GetBookingsBookingsLinks | undefined;
 };
 
+/**
+ * Links to the next and previous pages of a paginated response.
+ */
 export type GetBookingsLinks = {
   self?: string | undefined;
   next?: string | undefined;

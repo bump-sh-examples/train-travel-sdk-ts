@@ -37,6 +37,9 @@ export type GetStationsRequest = {
   country?: string | undefined;
 };
 
+/**
+ * Links to the next and previous pages of a paginated response.
+ */
 export type GetStationsLinks = {
   self?: string | undefined;
   next?: string | undefined;
@@ -51,6 +54,9 @@ export type GetStationsStationsResponseBody = {
   links?: GetStationsLinks | undefined;
 };
 
+/**
+ * Links to the next and previous pages of a paginated response.
+ */
 export type Links = {
   self?: string | undefined;
   next?: string | undefined;
