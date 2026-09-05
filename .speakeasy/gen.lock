@@ -1,38 +1,757 @@
 lockVersion: 2.0.0
 id: 479c13a8-a64a-4c55-9513-2c2580a50427
 management:
-  docChecksum: d16c4d5c6def724a3ae551e1ded195f5
-  docVersion: 1.2.0
-  speakeasyVersion: 1.469.2
-  generationVersion: 2.493.23
-  releaseVersion: 0.2.0
-  configChecksum: 5f323687ce27bc68502f5add174970d2
+  docChecksum: 4a84054fc9097855193f0c84047734a2
+  docVersion: 1.2.1
+  speakeasyVersion: 1.796.4
+  generationVersion: 2.935.1
+  releaseVersion: 0.3.0
+  configChecksum: 2aebfafccfdce621d022c5fd8509679a
   repoURL: https://github.com/bump-sh-examples/train-travel-sdk-ts.git
   installationURL: https://github.com/bump-sh-examples/train-travel-sdk-ts
   published: true
+persistentEdits:
+  generation_id: 35ace112-808a-4770-96db-f0eaae922e0e
+  pristine_commit_hash: 413ea6fe34ba85a23bcb3f4b3bdfd14a1675797c
+  pristine_tree_hash: 3cbd6ee581a276b555f2296653f8805223485409
 features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.11
-    core: 3.18.16
+    constsAndDefaults: 0.1.14
+    core: 3.31.6
     defaultEnabledRetries: 0.1.0
-    devContainers: 2.90.0
+    devContainers: 2.90.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.12
+    globalSecurity: 2.82.16
     globalSecurityCallbacks: 0.1.0
-    globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.4
-    groups: 2.81.2
-    inputOutputModels: 2.82.0
-    nameOverrides: 2.81.2
-    responseFormat: 0.2.3
-    retries: 2.83.0
-    sdkHooks: 0.2.0
-    unions: 2.85.8
-    uploadStreams: 0.1.0
-    webhooks: 1.4.1
+    globalSecurityFlattening: 0.1.1
+    globalServerURLs: 2.83.1
+    groups: 2.81.3
+    inputOutputModels: 2.82.1
+    nameOverrides: 2.81.4
+    responseFormat: 0.3.0
+    retries: 2.83.2
+    sdkHooks: 0.4.0
+    unions: 2.86.5
+    uploadStreams: 0.1.1
+    webhooks: 1.5.1
+trackedFiles:
+  .devcontainer/README.md:
+    id: b170c0f184ac
+    last_write_checksum: sha1:b04c3e5a5ffa29924a4fcb54a3d657bbe8037271
+    pristine_git_object: 51171d64f9ee8e770fdae9ca0789508c15944ca2
+  .devcontainer/devcontainer.json:
+    id: b34062a34eb1
+    last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
+    pristine_git_object: 4d560dd5f40afaf10d96eb75b1f02cd48bbd640c
+  .devcontainer/setup.sh:
+    id: 5f1dfbfeb8eb
+    last_write_checksum: sha1:79c341c49e62dcbf5ab5a42f18b8b327e4978431
+    pristine_git_object: a47a2698db2d1c8898226c3c02fee81d27289a53
+  .gitattributes:
+    id: 24139dae6567
+    last_write_checksum: sha1:26d16d8297b104945139da8c25bd38feeaad3e25
+    pristine_git_object: 113eead5093c17d43a46159132885318f281a68a
+  .npmignore:
+    id: aa70c1f807c3
+    last_write_checksum: sha1:6572da81f2e7a978ec29c22c2210bf461c5897b2
+    pristine_git_object: 670ac0a62d7e568c9d44a14f5deafb8442a255d8
+  FUNCTIONS.md:
+    id: 21b9df02aaeb
+    last_write_checksum: sha1:9ca5501ab4a1ff962f59b28ce31c7d7aa4f7aa32
+    pristine_git_object: f44a8d55428c15479fa264cda4fbb78f2692abf9
+  RUNTIMES.md:
+    id: 620c490847b6
+    last_write_checksum: sha1:e45b854f02c357cbcfdb8c3663000e8339e16505
+    pristine_git_object: 27731c3b5ace66bedc454ed5acbe15075aacd3dc
+  USAGE.md:
+    id: 3aed33ce6e6f
+    last_write_checksum: sha1:19110a1f64e5e1047c3753412f3a7fc5a2a4ced6
+    pristine_git_object: c52cde8dbc9c1893bf061f4ece19d540809dec4f
+  docs/lib/utils/retryconfig.md:
+    id: 0ce9707cb848
+    last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
+    pristine_git_object: 08f95f4552349360b2c0b01802aa71ec3a55d2c2
+  docs/models/components/accounttype.md:
+    id: 106c181c8bb5
+    last_write_checksum: sha1:2994c3a4deb285ba2acb967cce99ea39e0e9a66c
+    pristine_git_object: 806fae6ca7fc5f559e4ad3a9dc27eb9f5b99953a
+  docs/models/components/bankaccount.md:
+    id: 0eb59d73470f
+    last_write_checksum: sha1:978fa7a1a8ea3ce44028f13dbacb80992b533392
+    pristine_git_object: 86e8d095eb9788e75f2943a5b9009c437c92083b
+  docs/models/components/booking.md:
+    id: 36a79821e152
+    last_write_checksum: sha1:084614ec8949f26fb8898eac562deb79b5312f8c
+    pristine_git_object: 938f1d4c88ce0bf246f8228731ad17135d2ab295
+  docs/models/components/bookinginput.md:
+    id: 7d203f3442c1
+    last_write_checksum: sha1:a317946701670caa298c669455712c95625b78e9
+    pristine_git_object: 90e85de20c54246264a5939ab33b1b27460d7f75
+  docs/models/components/bookingpayment.md:
+    id: d4f3a773a9b7
+    last_write_checksum: sha1:828dbd13f26670031d2c71ee17583b807eac9bad
+    pristine_git_object: ee9202a7f6147ef34dd319211709e5536d0dba7d
+  docs/models/components/card.md:
+    id: d54a90b51617
+    last_write_checksum: sha1:fc279fcbae063fda08eaf77a46d18d5509b739cc
+    pristine_git_object: 0451e4c42584be3398888fd821f7e69f5250f763
+  docs/models/components/currency.md:
+    id: 2aa3e171a10d
+    last_write_checksum: sha1:ab83a35c5419b6c66bbd5eae17ab2c05bcac9329
+    pristine_git_object: bb18a7227b8459b35b1cac4e444be314f939c71b
+  docs/models/components/linksbooking.md:
+    id: 9e93424c5b59
+    last_write_checksum: sha1:21c156964bd1e2a8406efd1ba3fd4e59ed6a079e
+    pristine_git_object: 64f90d085353ed8d334c53b1093ae36c7b279087
+  docs/models/components/linksself.md:
+    id: 858d88f1f0ba
+    last_write_checksum: sha1:25f32a4f20e00f1a7585a0af3d3adf78eb0ed546
+    pristine_git_object: 0e8d39f32574adc0777019812849fd350c514105
+  docs/models/components/security.md:
+    id: 54906b49ea28
+    last_write_checksum: sha1:6c739bc5a67b552b68989e000780a07bf844af50
+    pristine_git_object: 6048927e07a46d215bac27d163ad547cde6a4753
+  docs/models/components/source.md:
+    id: 11d9227b9692
+    last_write_checksum: sha1:fb3b3c8f3ea73000a2a7b1c2fe3b3266c4b94ee9
+    pristine_git_object: 6d0338292a62bf0979fabbf050c3203125b8a356
+  docs/models/components/station.md:
+    id: 0c0dcbf9f6e8
+    last_write_checksum: sha1:b9e472e775db4181e32f5a7944c85d0a304bb3a2
+    pristine_git_object: 59d96017e2d1e31d2eab41c3c0720e65129ea35e
+  docs/models/components/trip.md:
+    id: a557e771cdd1
+    last_write_checksum: sha1:2e365b2df9db6550b0a1aa096d67e31bcd058759
+    pristine_git_object: b190184082fff247e4384fb92782080e830cb0e5
+  docs/models/operations/accounttype.md:
+    id: df041610635f
+    last_write_checksum: sha1:3db1e58c249873baa00af537145f3f735cd48b22
+    pristine_git_object: d94bb7cd5c340565c55c4abb628ecd2f1f4d1731
+  docs/models/operations/bankaccount.md:
+    id: 5f1e595c183d
+    last_write_checksum: sha1:f4235e9329211c94e2aae78acf432885e00771f8
+    pristine_git_object: 49acdccbed7fbb555fad7d7a25ddf0872f5b0de2
+  docs/models/operations/card.md:
+    id: db686cb6c5e5
+    last_write_checksum: sha1:9d06f6ef582882c1c1566b2e79b5e4ba54bf5a0d
+    pristine_git_object: e92837acce7f1bf5e3a36fd7d2822eb2bfde3648
+  docs/models/operations/createbookingjsonbookingsresponsebody.md:
+    id: 707a89254cf1
+    last_write_checksum: sha1:18315799eec8c6091b4809d7785b01641f590d94
+    pristine_git_object: e48da7d7d4e6584d54b9eab48a4f74b9a6fd898f
+  docs/models/operations/createbookingjsonresponse.md:
+    id: 4e988654b278
+    last_write_checksum: sha1:241a8213072de3f6e106b042d716a29ab2fba2d4
+    pristine_git_object: bbb57c31ce35dddfe73d884ecfd5a0eeacca03b5
+  docs/models/operations/createbookingjsonresponsebody.md:
+    id: 135a80ab7569
+    last_write_checksum: sha1:6668ee54e76b3cb4886a16bf1524d6df366702fc
+    pristine_git_object: 38b3ec6a042413e30c581d64157d5b2ea126984b
+  docs/models/operations/createbookingjsonresponseresult.md:
+    id: ab1636b53c3e
+    last_write_checksum: sha1:3dc57bf4cb527d8c0f53c1f893050f804b70eaaa
+    pristine_git_object: c800676ab3e9cc105d707d58e881ceb2e06f5d4f
+  docs/models/operations/createbookingpaymentrequest.md:
+    id: f484d7f1d410
+    last_write_checksum: sha1:1831e20dc3d5dc6b4e5a32d2a703d37ae38b7e9f
+    pristine_git_object: b48d24576ff8554732486a81bd574528e30e0902
+  docs/models/operations/createbookingpaymentresponse.md:
+    id: 803ea583b8c9
+    last_write_checksum: sha1:a70bad4c01e14a161d1d89dc483a0be89c0df36e
+    pristine_git_object: db12fa23c0c988266a3171d2c77f05dc623269cb
+  docs/models/operations/createbookingpaymentresponsebody.md:
+    id: d1fed73da0e8
+    last_write_checksum: sha1:c50a4dc8c0332cd65815367c47fc5f45d5c5d212
+    pristine_git_object: 7eb148ed645eac5d6e36f831284263ea45c256d5
+  docs/models/operations/createbookingrawbookingsresponsebody.md:
+    id: e4f5822bae67
+    last_write_checksum: sha1:c08776bdf82322358e39abce8ac235dede24c330
+    pristine_git_object: 1b8d72c1d8b313a93c1292b0454ac8c59b75a11b
+  docs/models/operations/createbookingrawresponse.md:
+    id: 3279cab68d87
+    last_write_checksum: sha1:33958bb4020ec5b1490dafff87d35cb69f1608bd
+    pristine_git_object: 921212c4b3a66586b045e19d693408aa6a050299
+  docs/models/operations/createbookingrawresponsebody.md:
+    id: 53d4e51dcfbe
+    last_write_checksum: sha1:8a67e41c1c4664e3bac0403fb5dff3fc1c9caae2
+    pristine_git_object: 9281f110c2f9e97559271098af74df9a4aed8d91
+  docs/models/operations/createbookingrawresponseresult.md:
+    id: 1bb390d4f0fb
+    last_write_checksum: sha1:c542bb9f4882d494c2c7fbb777614717a1bd3607
+    pristine_git_object: b8d046fbc0f0098ad210ebaef4e5c05af5b5f2c5
+  docs/models/operations/currency.md:
+    id: fd38bc946eb2
+    last_write_checksum: sha1:64483cc77cff6be62ce919bc5bcde57f2017b47d
+    pristine_git_object: 2e95a95c5fae7d70d615fd32499e4c2439fb145c
+  docs/models/operations/data.md:
+    id: acd9ffac9680
+    last_write_checksum: sha1:416ba6319831493f27d07fb6e46f1fd5d4061c5b
+    pristine_git_object: 51bc6a44981a6333f5ddcba746702d59bc766a52
+  docs/models/operations/deletebookingrequest.md:
+    id: cd93b2f5e3b2
+    last_write_checksum: sha1:2482d1ef4fe7a38610f20a3f270d6eb565949bf7
+    pristine_git_object: f8494eaaa6e10340ebffacc571cb9f6c12873aa0
+  docs/models/operations/deletebookingresponse.md:
+    id: da15ab0e2a71
+    last_write_checksum: sha1:37866731d8b0f9dcfb5076bd3c5c84bd695cc4ff
+    pristine_git_object: aa9bd9f136ac228bfd9e462330eea962e5254b54
+  docs/models/operations/getbookingbookingsresponsebody.md:
+    id: fc8d486aae87
+    last_write_checksum: sha1:5f41484c4b2927d7223db4259bdd53e8c0da269a
+    pristine_git_object: da0b8967f1ac2487eb939f91b73cf6c8ca70f4ef
+  docs/models/operations/getbookingrequest.md:
+    id: 084d7aa8fede
+    last_write_checksum: sha1:b0d013836c92a78474fb97dad1fcb9f146fd460c
+    pristine_git_object: c02b021e7a71903a21306d77e4adcb79a2b8fb0c
+  docs/models/operations/getbookingresponse.md:
+    id: 9e7882b04711
+    last_write_checksum: sha1:51c91055c8a2975305f2a1e29b93f9144aef2f7f
+    pristine_git_object: 560ffae58db98ff749d638814821ee7a3e8a3641
+  docs/models/operations/getbookingresponsebody.md:
+    id: eb600600d62f
+    last_write_checksum: sha1:ab48f977a67e52949e1c63a72a0459dbf9f0cb33
+    pristine_git_object: b25c745c09e1a88a4fc199a8083506d9005ac339
+  docs/models/operations/getbookingresponseresult.md:
+    id: 4f7b75e00402
+    last_write_checksum: sha1:43ac7e01ae3a0ada91144765a6afd892b9525ce5
+    pristine_git_object: 2c1f6918e319fb2cd37e653aec8819e34757040e
+  docs/models/operations/getbookingsbookingslinks.md:
+    id: a6179b883b80
+    last_write_checksum: sha1:d1f35b7ce60232f04dcd9a1eb6c891ad1624d21f
+    pristine_git_object: 33d36674807142a19c410f8fbb94cde4f1fdd8ae
+  docs/models/operations/getbookingsbookingsresponsebody.md:
+    id: 5ac8569e972d
+    last_write_checksum: sha1:b67ddf5253b7b169046aa6e83661259029847984
+    pristine_git_object: 93afe1bdcc714bc40658ee83fa1f7df428c2a560
+  docs/models/operations/getbookingslinks.md:
+    id: a492e1adc24c
+    last_write_checksum: sha1:468c6c99d1b8236ec55d69e5bb4d7f73999e9f73
+    pristine_git_object: a90cee98c29239ba1862709d10d56a7a936c79bc
+  docs/models/operations/getbookingsrequest.md:
+    id: 7f574480f924
+    last_write_checksum: sha1:84c5f3b39056d264f00b9ffa1233eb8ac49fd9e8
+    pristine_git_object: 5c4016744a23a8aa956e98d94d3a24428924853b
+  docs/models/operations/getbookingsresponse.md:
+    id: 1a923531e99e
+    last_write_checksum: sha1:d20b6dd046e495c7ce750671cca4ffe5ff5eec2d
+    pristine_git_object: ac34e111e591cc73ee108344fa2160fa4ea196c9
+  docs/models/operations/getbookingsresponsebody.md:
+    id: 965d8cf292eb
+    last_write_checksum: sha1:39465682b5e3f86e99a0ee733cfdfed724c58559
+    pristine_git_object: 61585b0accfcf84fe485d696ae96b68ebea90fe6
+  docs/models/operations/getbookingsresponseresult.md:
+    id: 79f57e13a749
+    last_write_checksum: sha1:ced21e2f4afdbe30ed3b801aa7b1ee59428e5e0d
+    pristine_git_object: 15f514be52e1e9ed4ad5dc10acb0f13963d5c63a
+  docs/models/operations/getstationslinks.md:
+    id: b9cb0cce4419
+    last_write_checksum: sha1:1e7ae4226b758d4ea6cc2599cdeb5eacc2e62b1d
+    pristine_git_object: 50f02c825023bfff2117081306cf7e2ed07cebde
+  docs/models/operations/getstationsrequest.md:
+    id: a39674bb1bbe
+    last_write_checksum: sha1:5f24f8f5e7e7e82a3c50618363b7956e0728813f
+    pristine_git_object: 716b0febf7c10c4cc5be54204af34c651c2a7e65
+  docs/models/operations/getstationsresponse.md:
+    id: 9379292fbedb
+    last_write_checksum: sha1:a2e9275fe42d64c6ebd50a0a8af280d97f4505bb
+    pristine_git_object: 9498925b15f8ee18c97edc5bce3c83bec3996d79
+  docs/models/operations/getstationsresponsebody.md:
+    id: 3c61002612dc
+    last_write_checksum: sha1:c2010e2e126d21028680a91283a6fd7b44bc4fa8
+    pristine_git_object: 065aba13938bc74526864fca1cb7804bd9f31561
+  docs/models/operations/getstationsresponseresult.md:
+    id: da21bd19d2b1
+    last_write_checksum: sha1:4cf3612b4f4e0611e00d0c452be2cd2bc8a2975e
+    pristine_git_object: b7da39a8081254271afd29aeb7d27b4fbea3eabc
+  docs/models/operations/getstationsstationsresponsebody.md:
+    id: e60f682a10be
+    last_write_checksum: sha1:bc84babd3381d9eef76395b615bfe46debf28aee
+    pristine_git_object: d956a6337ee9337fa2fbd49d1589045feaaa06ba
+  docs/models/operations/gettripslinks.md:
+    id: 839737b4d820
+    last_write_checksum: sha1:b8d6fe7d4b52d3cae1cc80d11585b4a27e638d54
+    pristine_git_object: 0f367f461d85357835337c6e65ee0677679f35ec
+  docs/models/operations/gettripsrequest.md:
+    id: 7fbeabd09147
+    last_write_checksum: sha1:1ebe76b001f8b8509a03bb8b8485d9f7cded93ea
+    pristine_git_object: fece47b6f83d632143e3a53f36289f2126675234
+  docs/models/operations/gettripsresponse.md:
+    id: b4f56fc38970
+    last_write_checksum: sha1:572cf027000944587e8203150765952c4e6ed9b9
+    pristine_git_object: 96a3105c51b92daab1c0dd920a37ba1a190a3a63
+  docs/models/operations/gettripsresponsebody.md:
+    id: 52f3596af8a9
+    last_write_checksum: sha1:2ebbf82db00e8016ccd8d0f1f694caaf9b3374bf
+    pristine_git_object: f40c1128e39263fd168caa7765b2d3d4c6401a05
+  docs/models/operations/gettripsresponseresult.md:
+    id: 942f3bfce4c8
+    last_write_checksum: sha1:ddc654cf4f47d1d330307fc3fc0de0a98a890020
+    pristine_git_object: 0356b082f94d32fa8cff8f4b73c66af018d53525
+  docs/models/operations/gettripstripslinks.md:
+    id: 8260fbad27c9
+    last_write_checksum: sha1:a4e6dc71a3fbec2cdaf84398fe69e3b878f0e2ab
+    pristine_git_object: 254f561205f4afc57c90eb721aebaaa2e38ba62a
+  docs/models/operations/gettripstripsresponsebody.md:
+    id: fbafe4f2bfa9
+    last_write_checksum: sha1:e85a59fd82470f90741fd25d9cbeea69a515f104
+    pristine_git_object: c172aa4041cfca86638cd17083b6c0d16b55f57f
+  docs/models/operations/links.md:
+    id: 161455a12c65
+    last_write_checksum: sha1:87737c22923e6d35b5862f90d1d8c6ca2e7a678c
+    pristine_git_object: 17543fadd375651d2d55239860c1593289132aee
+  docs/models/operations/source.md:
+    id: 31a3e4b3b2e6
+    last_write_checksum: sha1:98d5d00c0b84de6f7613a0124cc8540620347cbd
+    pristine_git_object: 9df77221751b956a95c6f60de4c34beb71b18003
+  docs/models/operations/status.md:
+    id: a42267b6f2cb
+    last_write_checksum: sha1:9daa1cbbb01ea5b846f04d51b48e87216312e043
+    pristine_git_object: 624ab02f0503b347d4b3caaefdf064edc3b00149
+  docs/models/webhooks/links.md:
+    id: 82b33121bbb8
+    last_write_checksum: sha1:639780a3fd8ac87c52ed277c2154f268631dd360
+    pristine_git_object: 445e0b2126e79c39696b448af7bfb3b0c3cf2148
+  docs/models/webhooks/newbookingrequestbody.md:
+    id: 612e4c2b530d
+    last_write_checksum: sha1:792cce769cb85cae7c8d798a7c75047887ffb634
+    pristine_git_object: b4e97e1cd0012cc6504a83ffd5840f3c542c2a3b
+  docs/sdks/bookings/README.md:
+    id: e45a5ceed45e
+    last_write_checksum: sha1:42f155c4e0c23cdb540df117efada32dec27bc53
+    pristine_git_object: 51453884c8afcc8e369d62f106d1118f08a696e9
+  docs/sdks/payments/README.md:
+    id: 0ddb15ec8c20
+    last_write_checksum: sha1:ff40028c1d4f127e67dc05cb66009b014b43d982
+    pristine_git_object: 45e0c81b9c90b72fad9f2e9a0eda7b5fc9344893
+  docs/sdks/stations/README.md:
+    id: 1299da0ccf94
+    last_write_checksum: sha1:eb0fa6bbb9ee6b0a4b5b11e865ec9c0e644eebf6
+    pristine_git_object: e4269c1dc932b79b399bd9aec464f0e2a79248a2
+  docs/sdks/trips/README.md:
+    id: 2e6550a2a974
+    last_write_checksum: sha1:afb509c821fa978f712e6a7652026e3bb9e57951
+    pristine_git_object: 2c01989019f46dc3155e0e9ba081bae8b35f733c
+  eslint.config.mjs:
+    id: 461c8d07f6da
+    last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
+    pristine_git_object: 67bccfec985be20a00970d90155752832dd47135
+  examples/.env.template:
+    id: 52cbe5afed92
+    last_write_checksum: sha1:e31c041a150721e5679f0f250bbddf0e74eceff5
+    pristine_git_object: 37e1975a219478ee3f486001d3144ff7889a6506
+  examples/README.md:
+    id: 9d0f69d6e677
+    last_write_checksum: sha1:24b6957539552215866f09b2d53b47e73b850100
+    pristine_git_object: 4d487bdbe5559f0793d52bdcc63af55fe2219193
+  examples/package.json:
+    id: c1d7b0ec8e7e
+    last_write_checksum: sha1:017227a399b93a6a6be59856fb42c14c5cfc333b
+    pristine_git_object: c8cf012b981f148a287c7fe5c8bca70c804ae016
+  examples/stationsList.example.ts:
+    id: 7e048abca849
+    last_write_checksum: sha1:8a1f73a592115f94805615c4243cb0cc92df1930
+    pristine_git_object: aeb30d95aba422ebde34c760bae4e79c384173e9
+  jsr.json:
+    id: 7f6ab7767282
+    last_write_checksum: sha1:2ce1e1966f992c39bc4d158f1f9a4d89c3800ab1
+    pristine_git_object: ee0fc5ceb4c1983cbe67c97aca37c4974a31a27c
+  package.json:
+    id: 7030d0b2f71b
+    last_write_checksum: sha1:65a5b161551d446a8b00b353c3fd80519b5fbdde
+    pristine_git_object: 935cca5ccb492b82e8ec1efab4b54a8a5c0b1b9f
+  src/core.ts:
+    id: f431fdbcd144
+    last_write_checksum: sha1:dd15aa5cb804de8c4355a4d574bc13a3d4c09af5
+    pristine_git_object: 4a9f7ef742334b21571d2d8ddd2a899947eb5808
+  src/funcs/bookingsCreateJson.ts:
+    id: c6ec572cd5a0
+    last_write_checksum: sha1:ff300c28cf5656bdcf2545263f2a5dd73c5e1f02
+    pristine_git_object: 479df98a010347a152f3c260160c8c586de6a4b9
+  src/funcs/bookingsCreateRaw.ts:
+    id: 0721ead3bbd8
+    last_write_checksum: sha1:ddf383d2a34f7cd0a93c03ebbbd742cf1ebd4b93
+    pristine_git_object: 4a23d7cbc5c4fccb2124d7dddb641b3efed03098
+  src/funcs/bookingsDelete.ts:
+    id: b8198c676c07
+    last_write_checksum: sha1:f1f74604786a72bfc3b1061a1bdc6d6849c2cfe0
+    pristine_git_object: 47c792b2af1faae123bbf63f224c54c2e8e7510c
+  src/funcs/bookingsGet.ts:
+    id: 7f36e4e46e5d
+    last_write_checksum: sha1:138f503d4a21ddcc76b3147f1ac408f01a7733c6
+    pristine_git_object: 9b1946e24c6f2d9afbff48221a4f3f6589662de5
+  src/funcs/bookingsList.ts:
+    id: 1ce370280cc6
+    last_write_checksum: sha1:f39f306b3317af01c775c5fcea5cda88f35e1384
+    pristine_git_object: 7f43324de30986881ff5b5a00dd3a29724bbef54
+  src/funcs/bookingsPaymentsCreate.ts:
+    id: d3ea168efe12
+    last_write_checksum: sha1:ef29d7c745f7bbf003948a7b77f84d7a46c62bed
+    pristine_git_object: eac8e50f7b05abb0d7db5bd524453fb94fed88f3
+  src/funcs/stationsList.ts:
+    id: 766c88e923c2
+    last_write_checksum: sha1:5edea59dd5d00a644f1e1bfebd90df29e0b5678f
+    pristine_git_object: c1d6b33231a1fd8b65790f4fe22a88bd51da69dc
+  src/funcs/tripsList.ts:
+    id: 8e694f8feeef
+    last_write_checksum: sha1:f68d402ede512c5e2cdc61746cd65ae474552a15
+    pristine_git_object: 8b90ecfb54822fe4357efd2c49ab3d22b2a43e66
+  src/funcs/validateWebhook.ts:
+    id: f3ebc1bebb84
+    last_write_checksum: sha1:10228d940f5275e9817a6fd46fb0fd93bb9cbd10
+    pristine_git_object: b9bd25fab0be1690bb1eff8945e8f14621fa4d5e
+  src/hooks/hooks.ts:
+    id: a2463fc6f69b
+    last_write_checksum: sha1:9a569ea8f3177ddcdfe6cd903feaf5c2d2c36a9a
+    pristine_git_object: d34c88497fb1cfb22a725e52b4c218f36d0b5c8e
+  src/hooks/index.ts:
+    id: 5f2dab62b520
+    last_write_checksum: sha1:1a11c073a6cd792932218e1d4ed36b8567bad8ef
+    pristine_git_object: f60ec7acd76141a71d78008c5a362eb0236d8335
+  src/hooks/oauth2scopes.ts:
+    id: a709b8ce2ddb
+    last_write_checksum: sha1:833dbad806e289ce9cb6d3e5a77117c56cde81e6
+    pristine_git_object: 6a6bcc5788a052c36b523a3cc519cbe2dbf34113
+  src/hooks/types.ts:
+    id: 2a02d86ec24f
+    last_write_checksum: sha1:cf149d5fd54431a0d0a456d2c91d0fcf09a50c0f
+    pristine_git_object: f33162f20ba6ed796de86f0fc0ae588882614af4
+  src/index.ts:
+    id: c5fb850250c7
+    last_write_checksum: sha1:35c9cde3ae14b18b3f893a1afe8b6c44f8760f24
+    pristine_git_object: dbcba164a0082e3bb8c43cf21fa7f8ffb9d35dfc
+  src/lib/base64.ts:
+    id: "598522066688"
+    last_write_checksum: sha1:b0b12ddbd8625efb47c0e955a18641aeb10c6532
+    pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
+  src/lib/config.ts:
+    id: 320761608fb3
+    last_write_checksum: sha1:1dc8c421f337efb60fe77d6a5a6676ab5afe8e96
+    pristine_git_object: f80dab72efc652008f5a19f6197cca1a62698998
+  src/lib/encodings.ts:
+    id: 3bd8ead98afd
+    last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
+    pristine_git_object: d6e751fe6a9a39af519df802d05c999f6783bae8
+  src/lib/env.ts:
+    id: c52972a3b198
+    last_write_checksum: sha1:8cc696b469c18ca0fc4a3f22c4d480155713f88d
+    pristine_git_object: e36cb218be7243caaf4f5eba92104db6f34d175e
+  src/lib/files.ts:
+    id: e5efa54fcb95
+    last_write_checksum: sha1:795c14026405d547bfc47012f7ad9666e530fa7f
+    pristine_git_object: 6ca6b37d35a12448da176ee2517cc036db12c81c
+  src/lib/http.ts:
+    id: 63a80782d37e
+    last_write_checksum: sha1:a56435907625a816051aa2131d60909c59f1da27
+    pristine_git_object: 6b7a6cf3e281cae246708b1aca4a27730e08fe61
+  src/lib/logger.ts:
+    id: 7ee7741a02bf
+    last_write_checksum: sha1:0ec9d3a2a34c362746b767e4f9a746c055d57a7b
+    pristine_git_object: d181f2937d4128afbe9b0327e0f81d1fa9c877b7
+  src/lib/matchers.ts:
+    id: d54b2253b719
+    last_write_checksum: sha1:43e3184df0c1dc3d7ba2d50ccdd7655d3a6697ce
+    pristine_git_object: efc0928ae61beebe1eff5f15c0cc1305fcbaf194
+  src/lib/primitives.ts:
+    id: 74859f750b28
+    last_write_checksum: sha1:fe3abb7d6b61596e346873519bcec9b2eaa61467
+    pristine_git_object: 8ce65db0f7c0d6b68f5edc3ebf518121e284e954
+  src/lib/retries.ts:
+    id: b24a69d15639
+    last_write_checksum: sha1:42c8f6cc4c875be236230a8c760f4f32d8c1ab68
+    pristine_git_object: 21a647e1e9ae64817fcd63b5dd6bb5a51b63d225
+  src/lib/schemas.ts:
+    id: deb4b531fae1
+    last_write_checksum: sha1:209cfaabfa7fc1c1310f97453215cb0755619c6e
+    pristine_git_object: 47edb9725c2482c667e2ddc8a56b1fec4285c492
+  src/lib/sdks.ts:
+    id: 8a6d91f1218d
+    last_write_checksum: sha1:50d337109949ddf7ba427e980508fd016b034dab
+    pristine_git_object: ab57a7d5294b3ea353afbcd82b8aceab22a9d8fe
+  src/lib/security.ts:
+    id: 0502afa7922e
+    last_write_checksum: sha1:90ea861562caa29321951ef2415f238bcc00da5f
+    pristine_git_object: 86f87e0979c9c2c606288c42972fed802de12db9
+  src/lib/url.ts:
+    id: b0057e24ed76
+    last_write_checksum: sha1:3bceadd74bf0b31adf13eb06b7531077c3e07d65
+    pristine_git_object: 79e7ce660b3732053e3adcbb5a4cdeb51496e8aa
+  src/models/components/booking.ts:
+    id: fd01070af172
+    last_write_checksum: sha1:ad86d62f3c79cdcf45b27b52989025785fc6fcb7
+    pristine_git_object: da7e8c3a837b7d254f05816e5f0e7cb5e12ab6f4
+  src/models/components/bookinginput.ts:
+    id: 863d0daf6c2a
+    last_write_checksum: sha1:e81d0fb2f87ba62afb438a32720ef3400d9108fc
+    pristine_git_object: 2e1e34276206de968cbde78a61d07b0ed2715653
+  src/models/components/bookingpayment.ts:
+    id: 23695df03fa1
+    last_write_checksum: sha1:b33b1b853459f5627a1ca1ff7828c46dc0e6ee66
+    pristine_git_object: f972968304857b8fbe502b802d1835c9e5ee9d93
+  src/models/components/index.ts:
+    id: 0aa842dce54d
+    last_write_checksum: sha1:ac0b0448cde7a043009e34ca132903dadca3fb06
+    pristine_git_object: 68c00af954034aceff5af3863d8acfd9b5e369c4
+  src/models/components/linksbooking.ts:
+    id: 30e1bb01e350
+    last_write_checksum: sha1:13d2d98ccd7d79007b2d214fcbbe16315ed1ae6a
+    pristine_git_object: b253e96461bf483506b635862bd146bb7acdbb53
+  src/models/components/linksself.ts:
+    id: 3d0580ae8429
+    last_write_checksum: sha1:768031fa8fab32f5cd79e88a9c29990dce4184a8
+    pristine_git_object: 8d92c505d19f7d1a003ef68941e85d00d2828b35
+  src/models/components/security.ts:
+    id: 472dde81bb1c
+    last_write_checksum: sha1:f72e8f65f247167421cf5c19bc887f35b13ef2ea
+    pristine_git_object: c0becc2f64023022742ece55ad0a31da320c41a8
+  src/models/components/station.ts:
+    id: 3d5b563d638d
+    last_write_checksum: sha1:44280e948abb2e0d716baa50650d48ff32c9ce0c
+    pristine_git_object: 2a8d351bdb60f9e2104f04109a5b8b93b975bf9b
+  src/models/components/trip.ts:
+    id: 8efd841e500c
+    last_write_checksum: sha1:a9f585a134d00934588d471e310630df117e20ae
+    pristine_git_object: d730c71940404d9fb8f4c6345837c90aee6a0500
+  src/models/errors/apierror.ts:
+    id: e2280e075454
+    last_write_checksum: sha1:b2e82367721561ee8a933758c7148bf068160b31
+    pristine_git_object: 10f68601cdfce5ccbede17b408ff311ade6439fb
+  src/models/errors/httpclienterrors.ts:
+    id: 6948de76af99
+    last_write_checksum: sha1:994ced121c54fecd0af038ccfb7855fbfd3868ec
+    pristine_git_object: b34f612124c797c2a1106b9735708f679a90b74f
+  src/models/errors/index.ts:
+    id: c4e22507cb83
+    last_write_checksum: sha1:65839f08130d6490dfaa85e2c83c412fb9a59ca4
+    pristine_git_object: 68096258f5a33fb691859bcbd4794e749c860a53
+  src/models/errors/responsevalidationerror.ts:
+    id: 88ff98a41be9
+    last_write_checksum: sha1:73a7230fef46ee72f75135552f28d7c4f0b6ffd2
+    pristine_git_object: da8cc4623683cbabf82abefa01f93515f9e95afd
+  src/models/errors/sdkvalidationerror.ts:
+    id: fb6b2b49c445
+    last_write_checksum: sha1:a69da17627bcc32b820544608f3400423ea53f26
+    pristine_git_object: 6826e1208a5d7b7d310535d18909646522bf0fbd
+  src/models/errors/traintravelsdkerror.ts:
+    id: 956cfd6ef7a2
+    last_write_checksum: sha1:97fb4d93c14afab3ecf230b7f023c954ab131497
+    pristine_git_object: 672b72c5f0492632a286806f69af8680528691a0
+  src/models/operations/createbookingjson.ts:
+    id: 8fd6d17c3e96
+    last_write_checksum: sha1:79cf9ad77bdeb017c3ff9ef1ca33736285467a59
+    pristine_git_object: 7651815ca9a230805f1730bbf00cf673f675b6ca
+  src/models/operations/createbookingpayment.ts:
+    id: 36810ce5ef5c
+    last_write_checksum: sha1:bf0c30a99c4e93df8fe936bbb6f32df2442dad1f
+    pristine_git_object: ee56ee85035b74658e56b08fdad0f191c15040b5
+  src/models/operations/createbookingraw.ts:
+    id: c308d727a9f7
+    last_write_checksum: sha1:48604dea4a307efd3499ebc58521ebfe5323a58c
+    pristine_git_object: bc7867359f1700c08a72e873b3988c69b0c17119
+  src/models/operations/deletebooking.ts:
+    id: 15b997dcea76
+    last_write_checksum: sha1:8b7cba3ef9691271500806ea0ad9a9ff4e742550
+    pristine_git_object: cfcd238c8b7f5f3ae04df08ee7dcd822dae4651b
+  src/models/operations/getbooking.ts:
+    id: 12e02cb0fa3a
+    last_write_checksum: sha1:6e515480ddb2724057989c26c5a88a2b23a82ddd
+    pristine_git_object: 664252cd62cb5f462d1fd49f96be6d00bee1a87c
+  src/models/operations/getbookings.ts:
+    id: 9c538fbacb7b
+    last_write_checksum: sha1:8069a9f53ba2309a7159e6c2c7c120ed0c49470d
+    pristine_git_object: 108c280ae8459eeabf9848dcc5e6aaae278f3454
+  src/models/operations/getstations.ts:
+    id: 28af28d1df58
+    last_write_checksum: sha1:67b3f5e92dab711fa56d1bcf0204078925570059
+    pristine_git_object: 36b955b227b6acf964e07020240e04da7cfa5fdc
+  src/models/operations/gettrips.ts:
+    id: c39e8e371278
+    last_write_checksum: sha1:26328e4c155797821ab0fa883d5bd6bdfcde5506
+    pristine_git_object: 70ca04ea3b1adad0b671914f6bfdf8346aa28779
+  src/models/operations/index.ts:
+    id: 0d9ffaf774d2
+    last_write_checksum: sha1:b3b780e97f84c55f25e1c1e2e6277f3fe199ffa8
+    pristine_git_object: f247c1cfac4b86a560c1bfc89a06357cb559b131
+  src/models/webhooks/index.ts:
+    id: 5319890a88a6
+    last_write_checksum: sha1:5c46a54b5a806d1f77b2069a19e68ef0e9000939
+    pristine_git_object: 45d85f60d488cbf3fa4b4b0cb9c081eef9bef6ad
+  src/models/webhooks/newbooking.ts:
+    id: b48fe521a8a3
+    last_write_checksum: sha1:037d464fd348fb5a62759f33fcb0ae8b5e2bc12c
+    pristine_git_object: e80eeee392caecec3625cf920091e590c6d0454d
+  src/sdk/bookings.ts:
+    id: 49019c0d99de
+    last_write_checksum: sha1:8ecc7378fb863a7feb71718b28f31f1c74e94673
+    pristine_git_object: bdcc4fb762b96ba57b8a0bf51030b951567ac6cc
+  src/sdk/index.ts:
+    id: a857902a703f
+    last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
+    pristine_git_object: ecac2264817bb369ff2dbf0f0e9029807e67ff77
+  src/sdk/payments.ts:
+    id: f059d3c1d898
+    last_write_checksum: sha1:eb9e2e6212a1158614255f33ab9dda6417261039
+    pristine_git_object: 150c5448f1a972e66368e92e7dc6bafaf1ad57d5
+  src/sdk/sdk.ts:
+    id: 784571af2f69
+    last_write_checksum: sha1:db05642f0b821758c87ce9cab3f29124515a8915
+    pristine_git_object: 17b5b5ececb08a80e0a48641f1e35d98ee885718
+  src/sdk/stations.ts:
+    id: e0d10fffccfb
+    last_write_checksum: sha1:0fe93843d36311bb0dc216f5d19390533cc26c8c
+    pristine_git_object: d77a9682b3c4cf5060df850b7e4a9e6bf90e1425
+  src/sdk/trips.ts:
+    id: 2e466ceaf03e
+    last_write_checksum: sha1:4339cdce9838e6e125b16b9745c9ae539be3e340
+    pristine_git_object: fdd9d252b4f6cc848a1ac32a2871d427abcb51f4
+  src/types/async.ts:
+    id: fac8da972f86
+    last_write_checksum: sha1:675d04bb4b4081dc3482f18de98674f9b446e7b4
+    pristine_git_object: 1543b95cf7be9b5a871d7395f259dbd65331dc21
+  src/types/blobs.ts:
+    id: f8ab9b326c86
+    last_write_checksum: sha1:cf45d78916671cb6345a11c97c633c64402bc27c
+    pristine_git_object: cce2892d4f573a120ef3907db90ab15f5979cfda
+  src/types/constdatetime.ts:
+    id: 0f7b6f513917
+    last_write_checksum: sha1:dfaaf9adfaf49808bd4c9dea0039f21b7088d9c0
+    pristine_git_object: fe62144eaf6a2054fc8ca9a98466e70f41b5434d
+  src/types/enums.ts:
+    id: 4d03ddfe5100
+    last_write_checksum: sha1:ee590453d2c87e33e89c633d37ee46907eca0e58
+    pristine_git_object: aba0ffd2a3308a31e516d83b52823d80aa65a8f9
+  src/types/fp.ts:
+    id: ae9f0fb8aab6
+    last_write_checksum: sha1:d24994d58f37a1ca106847fcc6d2e976c6f1c093
+    pristine_git_object: ccbe51eac69dfb0da5131f14fd753c4b47c1d527
+  src/types/index.ts:
+    id: cd7a0a5ed005
+    last_write_checksum: sha1:25820e050c332015aaff5b5de2bbec51c3edd3ad
+    pristine_git_object: 8249564b4af12e95d783f3ad39f37f88346b6d09
+  src/types/operations.ts:
+    id: 314da01dca47
+    last_write_checksum: sha1:c49e724cfb1259296381cb57bc0fcdd2eae45865
+    pristine_git_object: beb81e10f0b9eee2ed398a853fe6f737b743f818
+  src/types/rfcdate.ts:
+    id: 9eb64906dcd6
+    last_write_checksum: sha1:8e5f382e02fe21c2f2e24deb1b7bbf8cddd3dd16
+    pristine_git_object: c79b3f53a3dd922aa2ace5a4191c8652cf9a8e89
+  src/types/streams.ts:
+    id: f99be9c4bf14
+    last_write_checksum: sha1:cc9ced2dd34a76c3a1bd7784ccda1cc3b37ab9a9
+    pristine_git_object: a0163e7a99cea88f21d0ad4ce3af1c720180ee20
+  src/types/unrecognized.ts:
+    id: 476605c40716
+    last_write_checksum: sha1:d33ac686528492f4cdc0dbf81ed343b4afe020fe
+    pristine_git_object: b7a2a13f3dff50663429df24ae2f55b647ff1084
+  src/types/webhooks.ts:
+    id: 2f5c16db294b
+    last_write_checksum: sha1:dbce0cb417bcdcfcae0827fa045ee93ccab1c2c8
+    pristine_git_object: 9510d20c09d8dd689f6e37254030de22e997f3cc
+  tsconfig.json:
+    id: 61ebb9fd6e8c
+    last_write_checksum: sha1:79dc1550d921fefec69f8632ed3b24dad41ca2f6
+    pristine_git_object: 76110f883cac40bb04fb2f376cd69ea8c8d6d215
+examples:
+  get-stations:
+    speakeasy-default-get-stations:
+      parameters:
+        query:
+          page: 1
+          limit: 10
+          coordinates: "52.5200,13.4050"
+          search: "Milano Centrale"
+          country: "DE"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "name": "Berlin Hauptbahnhof", "address": "Invalidenstraße 10557 Berlin, Germany", "country_code": "DE", "timezone": "Europe/Berlin"}]}
+          application/xml: "0x293b1DEa21"
+  get-trips:
+    speakeasy-default-get-trips:
+      parameters:
+        query:
+          page: 1
+          limit: 10
+          origin: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e"
+          destination: "b2e783e1-c824-4d63-b37a-d8d698862f1d"
+          date: "2024-02-01T09:00:00Z"
+          bicycles: false
+          dogs: false
+      responses:
+        "200":
+          application/json: {"data": [{"id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "origin": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "destination": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "departure_time": "2024-02-01T10:00:00Z", "arrival_time": "2024-02-01T16:00:00Z", "operator": "Deutsche Bahn", "price": 50}]}
+          application/xml: "0x6A4f64db8E"
+  get-bookings:
+    speakeasy-default-get-bookings:
+      parameters:
+        query:
+          page: 1
+          limit: 10
+      responses:
+        "200":
+          application/json: {"data": [{"id": "3f3e3e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}]}
+          application/xml: "0x3Ad8BBcDf1"
+  create-booking:
+    speakeasy-default-create-booking-json:
+      requestBody:
+        application/json: {"trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
+      responses:
+        "201":
+          application/json: {"id": "3f3e3e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
+          application/xml: "0xdA1F458b0c"
+    speakeasy-default-create-booking-raw:
+      requestBody:
+        application/xml: "x-file: example.file"
+      responses:
+        "201":
+          application/json: {"id": "3f3e3e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
+          application/xml: "0xdA1F458b0c"
+  get-booking:
+    speakeasy-default-get-booking:
+      parameters:
+        path:
+          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
+      responses:
+        "200":
+          application/json: {"id": "3f3e3e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
+          application/xml: "0x3D031c7224"
+  delete-booking:
+    speakeasy-default-delete-booking:
+      parameters:
+        path:
+          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
+  create-booking-payment:
+    Card:
+      parameters:
+        path:
+          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
+      requestBody:
+        application/json: {"amount": 49.99, "currency": "gbp", "source": {"object": "card", "name": "J. Doe", "number": "4242424242424242", "cvc": "123", "exp_month": 12, "exp_year": 2025, "address_line1": "123 Fake Street", "address_line2": "4th Floor", "address_city": "London", "address_country": "gb", "address_post_code": "N12 9XX"}}
+      responses:
+        "200":
+          application/json: {"id": "2e3b4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a", "amount": 49.99, "currency": "gbp", "source": {"object": "card", "name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "status": "succeeded", "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb/payment"}}
+    Bank:
+      parameters:
+        path:
+          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
+      requestBody:
+        application/json: {"amount": 100.5, "currency": "gbp", "source": {"object": "bank_account", "name": "J. Doe", "number": "00012345", "sort_code": "000123", "account_type": "individual", "bank_name": "Starling Bank", "country": "gb"}}
+      responses:
+        "200":
+          application/json: {"id": "2e3b4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a", "amount": 100.5, "currency": "gbp", "source": {"object": "bank_account", "name": "J. Doe", "number": "*********2345", "sort_code": "000123", "account_type": "individual", "bank_name": "Starling Bank", "country": "gb"}, "status": "succeeded", "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
+    speakeasy-default-create-booking-payment:
+      parameters:
+        path:
+          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
+      requestBody:
+        application/json: {"amount": 49.99, "source": {"object": "card", "name": "Francis Bourgeois", "number": "4242424242424242", "cvc": "123", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}}
+      responses:
+        "200":
+          application/json: {"amount": 49.99, "source": {"object": "card", "name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
+examplesVersion: 1.0.2
+generatedTests: {}
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -181,94 +900,3 @@ generatedFiles:
   - src/types/streams.ts
   - src/types/webhooks.ts
   - tsconfig.json
-examples:
-  get-stations:
-    "":
-      parameters:
-        query:
-          page: 1
-          limit: 10
-          coordinates: "52.5200,13.4050"
-          search: "Paris"
-          country: "DE"
-      responses:
-        "200":
-          application/json: {"data": [{"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "name": "Berlin Hauptbahnhof", "address": "Invalidenstraße 10557 Berlin, Germany", "country_code": "DE", "timezone": "Europe/Berlin"}, {"id": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "name": "Paris Gare du Nord", "address": "18 Rue de Dunkerque 75010 Paris, France", "country_code": "FR", "timezone": "Europe/Paris"}], "links": {"self": "https://api.example.com/stations&page=2", "next": "https://api.example.com/stations?page=3", "prev": "https://api.example.com/stations?page=1"}}
-  get-trips:
-    "":
-      parameters:
-        query:
-          page: 1
-          limit: 10
-          origin: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e"
-          destination: "b2e783e1-c824-4d63-b37a-d8d698862f1d"
-          date: "2024-02-01T09:00:00Z"
-          bicycles: false
-          dogs: false
-      responses:
-        "200":
-          application/json: {"data": [{"id": "ea399ba1-6d95-433f-92d1-83f67b775594", "origin": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "destination": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "departure_time": "2024-02-01T10:00:00Z", "arrival_time": "2024-02-01T16:00:00Z", "operator": "Deutsche Bahn", "price": 50, "bicycles_allowed": true, "dogs_allowed": true}, {"id": "4d67459c-af07-40bb-bb12-178dbb88e09f", "origin": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "destination": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "departure_time": "2024-02-01T12:00:00Z", "arrival_time": "2024-02-01T18:00:00Z", "operator": "SNCF", "price": 50, "bicycles_allowed": true, "dogs_allowed": true}], "links": {"self": "https://api.example.com/trips?origin=efdbb9d1-02c2-4bc3-afb7-6788d8782b1e&destination=b2e783e1-c824-4d63-b37a-d8d698862f1d&date=2024-02-01", "next": "https://api.example.com/trips?origin=efdbb9d1-02c2-4bc3-afb7-6788d8782b1e&destination=b2e783e1-c824-4d63-b37a-d8d698862f1d&date=2024-02-01&page=2"}}
-  get-bookings:
-    "":
-      parameters:
-        query:
-          page: 1
-          limit: 10
-      responses:
-        "200":
-          application/json: {"data": [{"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "trip_id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "passenger_name": "John Doe", "has_bicycle": true, "has_dog": true}, {"id": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "trip_id": "b2e783e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "Jane Smith", "has_bicycle": false, "has_dog": false}], "links": {"self": "https://api.example.com/bookings", "next": "https://api.example.com/bookings?page=2"}}
-  create-booking:
-    "":
-      requestBody:
-        application/json: {"trip_id": "4f4e4e1-c824-4d63-b37a-d8d698862f1d", "passenger_name": "John Doe"}
-        application/xml: "x-file: example.file"
-      responses:
-        "201":
-          application/json: {"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "trip_id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "passenger_name": "John Doe", "has_bicycle": true, "has_dog": true, "links": {"self": "https://api.example.com/bookings/efdbb9d1-02c2-4bc3-afb7-6788d8782b1e"}}
-  get-booking:
-    "":
-      parameters:
-        path:
-          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
-      responses:
-        "200":
-          application/json: {"id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "trip_id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "passenger_name": "John Doe", "has_bicycle": true, "has_dog": true, "links": {"self": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
-  delete-booking:
-    "":
-      parameters:
-        path:
-          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
-  new-booking:
-    "":
-      requestBody:
-        application/json: {"trip_id": "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e", "passenger_name": "John Doe", "has_bicycle": true, "has_dog": true, "links": {"self": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
-  create-booking-payment:
-    Card:
-      parameters:
-        path:
-          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
-      requestBody:
-        application/json: {"amount": 49.99, "currency": "gbp", "source": {"object": "card", "name": "J. Doe", "number": "4242424242424242", "cvc": "123", "exp_month": 12, "exp_year": 2025, "address_line1": "123 Fake Street", "address_line2": "4th Floor", "address_city": "London", "address_country": "gb", "address_post_code": "N12 9XX"}}
-      responses:
-        "200":
-          application/json: {"id": "2e3b4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a", "amount": 49.99, "currency": "gbp", "source": {"name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "status": "succeeded", "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb/payment"}}
-    Bank:
-      parameters:
-        path:
-          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
-      requestBody:
-        application/json: {"amount": 100.5, "currency": "gbp", "source": {"object": "bank_account", "name": "J. Doe", "number": "00012345", "sort_code": "000123", "account_type": "individual", "bank_name": "Starling Bank", "country": "gb"}}
-      responses:
-        "200":
-          application/json: {"id": "2e3b4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a", "amount": 100.5, "currency": "gbp", "source": {"object": "bank_account", "name": "J. Doe", "number": "*********2345", "sort_code": "000123", "account_type": "individual", "bank_name": "Starling Bank", "country": "gb"}, "status": "succeeded", "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
-    "":
-      parameters:
-        path:
-          bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb"
-      requestBody:
-        application/json: {"amount": 49.99, "source": {"name": "<value>", "number": "<value>", "account_type": "individual", "bank_name": "Starling Bank", "country": "Brunei Darussalam"}}
-      responses:
-        "200":
-          application/json: {"amount": 49.99, "source": {"name": "Francis Bourgeois", "number": "4242424242424242", "exp_month": 12, "exp_year": 2025, "address_country": "<value>"}, "links": {"booking": "https://api.example.com/bookings/1725ff48-ab45-4bb5-9d02-88745177dedb"}}
-examplesVersion: 1.0.0
-generatedTests: {}

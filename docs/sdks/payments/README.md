@@ -1,5 +1,4 @@
-# Payments
-(*bookings.payments*)
+# Bookings.Payments
 
 ## Overview
 
@@ -11,8 +10,84 @@
 
 A payment is an attempt to pay for the booking, which will confirm the booking for the user and enable them to get their tickets.
 
-### Example Usage
+### Example Usage: Bank
 
+<!-- UsageSnippet language="typescript" operationID="create-booking-payment" method="post" path="/bookings/{bookingId}/payment" example="Bank" -->
+```typescript
+import { TrainTravelSDK } from "train-travel-sdk";
+
+const trainTravelSDK = new TrainTravelSDK({
+  oAuth2: process.env["TRAINTRAVELSDK_O_AUTH2"] ?? "",
+});
+
+async function run() {
+  const result = await trainTravelSDK.bookings.payments.create({
+    bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
+    bookingPayment: {
+      amount: 100.5,
+      currency: "gbp",
+      source: {
+        object: "bank_account",
+        name: "J. Doe",
+        number: "00012345",
+        sortCode: "000123",
+        accountType: "individual",
+        bankName: "Starling Bank",
+        country: "gb",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { TrainTravelSDKCore } from "train-travel-sdk/core.js";
+import { bookingsPaymentsCreate } from "train-travel-sdk/funcs/bookingsPaymentsCreate.js";
+
+// Use `TrainTravelSDKCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const trainTravelSDK = new TrainTravelSDKCore({
+  oAuth2: process.env["TRAINTRAVELSDK_O_AUTH2"] ?? "",
+});
+
+async function run() {
+  const res = await bookingsPaymentsCreate(trainTravelSDK, {
+    bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
+    bookingPayment: {
+      amount: 100.5,
+      currency: "gbp",
+      source: {
+        object: "bank_account",
+        name: "J. Doe",
+        number: "00012345",
+        sortCode: "000123",
+        accountType: "individual",
+        bankName: "Starling Bank",
+        country: "gb",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingsPaymentsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: Card
+
+<!-- UsageSnippet language="typescript" operationID="create-booking-payment" method="post" path="/bookings/{bookingId}/payment" example="Card" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -27,6 +102,7 @@ async function run() {
       amount: 49.99,
       currency: "gbp",
       source: {
+        object: "card",
         name: "J. Doe",
         number: "4242424242424242",
         cvc: "123",
@@ -41,7 +117,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -69,6 +144,7 @@ async function run() {
       amount: 49.99,
       currency: "gbp",
       source: {
+        object: "card",
         name: "J. Doe",
         number: "4242424242424242",
         cvc: "123",
@@ -82,15 +158,12 @@ async function run() {
       },
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingsPaymentsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
