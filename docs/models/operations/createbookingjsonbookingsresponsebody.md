@@ -1,6 +1,6 @@
 # CreateBookingJsonBookingsResponseBody
 
-Booking successful
+A booking for a train trip.
 
 ## Example Usage
 
@@ -23,4 +23,4 @@ let value: CreateBookingJsonBookingsResponseBody = {
 | `passengerName`                                              | *string*                                                     | :heavy_minus_sign:                                           | Name of the passenger                                        | John Doe                                                     |
 | `hasBicycle`                                                 | *boolean*                                                    | :heavy_minus_sign:                                           | Indicates whether the passenger has a bicycle.               |                                                              |
 | `hasDog`                                                     | *boolean*                                                    | :heavy_minus_sign:                                           | Indicates whether the passenger has a dog.                   |                                                              |
-| `links`                                                      | [components.LinksSelf](../../models/components/linksself.md) | :heavy_minus_sign:                                           | N/A                                                          |                                                              |
+| `links`                                                      | [components.LinksSelf](../../models/components/linksself.md) | :heavy_minus_sign:                                           | The link to the current resource.                            |                                                              |
