@@ -1,11 +1,11 @@
 # Standalone Functions
 
 > [!NOTE]
-> This section is useful if you are using a bundler and targetting browsers and
+> This section is useful if you are using a bundler and targeting browsers and
 > runtimes where the size of an application affects performance and load times. 
 
 Every method in this SDK is also available as a standalone function. This
-alternative API is suitable when targetting the browser or serverless runtimes
+alternative API is suitable when targeting the browser or serverless runtimes
 and using a bundler to build your application since all unused functionality
 will be tree-shaken away. This includes code for unused methods, Zod schemas,
 encoding helpers and response handlers. The result is dramatically smaller
@@ -21,7 +21,6 @@ specific category of applications.
 ```typescript
 import { TrainTravelSDKCore } from "train-travel-sdk/core.js";
 import { stationsList } from "train-travel-sdk/funcs/stationsList.js";
-import { SDKValidationError } from "train-travel-sdk/models/errors/sdkvalidationerror.js";
 
 // Use `TrainTravelSDKCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -31,34 +30,16 @@ const trainTravelSDK = new TrainTravelSDKCore({
 
 async function run() {
   const res = await stationsList(trainTravelSDK, {
-    page: 1,
-    limit: 10,
     coordinates: "52.5200,13.4050",
-    search: "Paris",
+    search: "Milano Centrale",
     country: "DE",
   });
-
-  switch (true) {
-    case res.ok:
-      // The success case will be handled outside of the switch block
-      break;
-    case res.error instanceof SDKValidationError:
-      // Pretty-print validation errors.
-      return console.log(res.error.pretty());
-    case res.error instanceof Error:
-      return console.log(res.error);
-    default:
-      // TypeScript's type checking will fail on the following line if the above
-      // cases were not exhaustive.
-      res.error satisfies never;
-      throw new Error("Assertion failed: expected error checks to be exhaustive: " + res.error);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("stationsList failed:", res.error);
   }
-
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

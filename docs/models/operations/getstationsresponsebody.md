@@ -11,10 +11,10 @@ let value: GetStationsResponseBody = {
   data: [
     {
       id: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e",
-      name: "Paris Gare du Nord",
-      address: "18 Rue de Dunkerque 75010 Paris, France",
+      name: "Berlin Hauptbahnhof",
+      address: "Invalidenstraße 10557 Berlin, Germany",
       countryCode: "DE",
-      timezone: "Europe/Paris",
+      timezone: "Europe/Berlin",
     },
   ],
 };

@@ -1,5 +1,7 @@
 # LinksSelf
 
+The link to the current resource.
+
 ## Example Usage
 
 ```typescript

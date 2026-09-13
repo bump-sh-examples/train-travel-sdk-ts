@@ -5,10 +5,7 @@
 ```typescript
 import { GetBookingsRequest } from "train-travel-sdk/models/operations";
 
-let value: GetBookingsRequest = {
-  page: 1,
-  limit: 10,
-};
+let value: GetBookingsRequest = {};
 ```
 
 ## Fields

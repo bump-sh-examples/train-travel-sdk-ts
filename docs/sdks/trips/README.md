@@ -1,5 +1,4 @@
 # Trips
-(*trips*)
 
 ## Overview
 
@@ -18,6 +17,7 @@ Returns a list of available train trips between the specified origin and destina
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-trips" method="get" path="/trips" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -27,16 +27,11 @@ const trainTravelSDK = new TrainTravelSDK({
 
 async function run() {
   const result = await trainTravelSDK.trips.list({
-    page: 1,
-    limit: 10,
     origin: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e",
     destination: "b2e783e1-c824-4d63-b37a-d8d698862f1d",
     date: new Date("2024-02-01T09:00:00Z"),
-    bicycles: false,
-    dogs: false,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -59,23 +54,16 @@ const trainTravelSDK = new TrainTravelSDKCore({
 
 async function run() {
   const res = await tripsList(trainTravelSDK, {
-    page: 1,
-    limit: 10,
     origin: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e",
     destination: "b2e783e1-c824-4d63-b37a-d8d698862f1d",
     date: new Date("2024-02-01T09:00:00Z"),
-    bicycles: false,
-    dogs: false,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("tripsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
