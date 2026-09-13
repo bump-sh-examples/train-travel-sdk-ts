@@ -6,19 +6,15 @@
 import { CreateBookingPaymentResponse } from "train-travel-sdk/models/operations";
 
 let value: CreateBookingPaymentResponse = {
-  headers: {
-    "key": [
-      "<value>",
-    ],
-  },
+  headers: {},
   result: {
     amount: 49.99,
     source: {
-      name: "<value>",
-      number: "<value>",
-      accountType: "company",
-      bankName: "Starling Bank",
-      country: "Philippines",
+      name: "Francis Bourgeois",
+      number: "4242424242424242",
+      expMonth: 12,
+      expYear: 2025,
+      addressCountry: "<value>",
     },
     links: {
       booking:

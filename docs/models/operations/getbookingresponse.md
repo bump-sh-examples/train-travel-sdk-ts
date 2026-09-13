@@ -8,10 +8,17 @@ import { GetBookingResponse } from "train-travel-sdk/models/operations";
 let value: GetBookingResponse = {
   headers: {
     "key": [
-      "<value>",
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+    "key1": [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
   },
-  result: new TextEncoder().encode("0xFe9d06e6d9"),
+  result: new TextEncoder().encode("0x50aAd25aB8"),
 };
 ```
 

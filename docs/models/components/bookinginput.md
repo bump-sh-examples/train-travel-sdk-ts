@@ -1,5 +1,7 @@
 # BookingInput
 
+A booking for a train trip.
+
 ## Example Usage
 
 ```typescript

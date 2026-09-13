@@ -24,9 +24,9 @@ const value: components.Card = {
 const value: components.BankAccount = {
   name: "<value>",
   number: "<value>",
-  accountType: "individual",
+  accountType: "company",
   bankName: "Starling Bank",
-  country: "Bahrain",
+  country: "Benin",
 };
 ```
 

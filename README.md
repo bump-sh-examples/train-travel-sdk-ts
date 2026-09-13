@@ -75,10 +75,7 @@ bun add train-travel-sdk
 ### Yarn
 
 ```bash
-yarn add train-travel-sdk zod
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
+yarn add train-travel-sdk
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -102,14 +99,11 @@ const trainTravelSDK = new TrainTravelSDK({
 
 async function run() {
   const result = await trainTravelSDK.stations.list({
-    page: 1,
-    limit: 10,
     coordinates: "52.5200,13.4050",
-    search: "Paris",
+    search: "Milano Centrale",
     country: "DE",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -139,14 +133,11 @@ const trainTravelSDK = new TrainTravelSDK({
 
 async function run() {
   const result = await trainTravelSDK.stations.list({
-    page: 1,
-    limit: 10,
     coordinates: "52.5200,13.4050",
-    search: "Paris",
+    search: "Milano Centrale",
     country: "DE",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -161,7 +152,7 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [bookings](docs/sdks/bookings/README.md)
+### [Bookings](docs/sdks/bookings/README.md)
 
 * [list](docs/sdks/bookings/README.md#list) - List existing bookings
 * [createJson](docs/sdks/bookings/README.md#createjson) - Create a booking
@@ -169,16 +160,15 @@ run();
 * [get](docs/sdks/bookings/README.md#get) - Get a booking
 * [delete](docs/sdks/bookings/README.md#delete) - Delete a booking
 
-#### [bookings.payments](docs/sdks/payments/README.md)
+### [Bookings.Payments](docs/sdks/payments/README.md)
 
 * [create](docs/sdks/payments/README.md#create) - Pay for a Booking
 
-### [stations](docs/sdks/stations/README.md)
+### [Stations](docs/sdks/stations/README.md)
 
 * [list](docs/sdks/stations/README.md#list) - Get a list of train stations
 
-
-### [trips](docs/sdks/trips/README.md)
+### [Trips](docs/sdks/trips/README.md)
 
 * [list](docs/sdks/trips/README.md#list) - Get available train trips
 
@@ -235,10 +225,13 @@ const trainTravelSDK = new TrainTravelSDK({
 
 async function run() {
   const result = await trainTravelSDK.bookings.createRaw(
-    bytesToStream(new TextEncoder().encode("0x6f39dACC0a")),
+    bytesToStream(
+      new TextEncoder().encode(
+        "{\"trip_id\":\"4f4e4e1-c824-4d63-b37a-d8d698862f1d\",\"passenger_name\":\"John Doe\"}",
+      ),
+    ),
   );
 
-  // Handle the result
   console.log(result);
 }
 
@@ -262,10 +255,8 @@ const trainTravelSDK = new TrainTravelSDK({
 
 async function run() {
   const result = await trainTravelSDK.stations.list({
-    page: 1,
-    limit: 10,
     coordinates: "52.5200,13.4050",
-    search: "Paris",
+    search: "Milano Centrale",
     country: "DE",
   }, {
     retries: {
@@ -280,7 +271,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -308,14 +298,11 @@ const trainTravelSDK = new TrainTravelSDK({
 
 async function run() {
   const result = await trainTravelSDK.stations.list({
-    page: 1,
-    limit: 10,
     coordinates: "52.5200,13.4050",
-    search: "Paris",
+    search: "Milano Centrale",
     country: "DE",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -327,55 +314,40 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-If the request fails due to, for example 4XX or 5XX status codes, it will throw a `APIError`.
+[`TrainTravelSDKError`](./src/models/errors/traintravelsdkerror.ts) is the base class for all HTTP error responses. It has the following properties:
 
-| Error Type      | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| errors.APIError | 4XX, 5XX    | \*/\*        |
+| Property            | Type       | Description                                            |
+| ------------------- | ---------- | ------------------------------------------------------ |
+| `error.message`     | `string`   | Error message                                          |
+| `error.statusCode`  | `number`   | HTTP response status code eg `404`                     |
+| `error.headers`     | `Headers`  | HTTP response headers                                  |
+| `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned. |
+| `error.rawResponse` | `Response` | Raw HTTP response                                      |
 
+### Example
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
-import { SDKValidationError } from "train-travel-sdk/models/errors";
+import * as errors from "train-travel-sdk/models/errors";
 
 const trainTravelSDK = new TrainTravelSDK({
   oAuth2: process.env["TRAINTRAVELSDK_O_AUTH2"] ?? "",
 });
 
 async function run() {
-  let result;
   try {
-    result = await trainTravelSDK.stations.list({
-      page: 1,
-      limit: 10,
+    const result = await trainTravelSDK.stations.list({
       coordinates: "52.5200,13.4050",
-      search: "Paris",
+      search: "Milano Centrale",
       country: "DE",
     });
 
-    // Handle the result
     console.log(result);
-  } catch (err) {
-    switch (true) {
-      // The server response does not match the expected SDK schema
-      case (err instanceof SDKValidationError):
-        {
-          // Pretty-print will provide a human-readable multi-line error message
-          console.error(err.pretty());
-          // Raw value may also be inspected
-          console.error(err.rawValue);
-          return;
-        }
-        apierror.js;
-      // Server returned an error status code or an unknown content type
-      case (err instanceof APIError): {
-        console.error(err.statusCode);
-        console.error(err.rawResponse.body);
-        return;
-      }
-      default: {
-        // Other errors such as network errors, see HTTPClientErrors for more details
-        throw err;
-      }
+  } catch (error) {
+    if (error instanceof errors.TrainTravelSDKError) {
+      console.log(error.message);
+      console.log(error.statusCode);
+      console.log(error.body);
+      console.log(error.headers);
     }
   }
 }
@@ -384,17 +356,26 @@ run();
 
 ```
 
-Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted multi-line string since validation errors can list many issues and the plain error string may be difficult read when debugging.
+### Error Classes
+**Primary error:**
+* [`TrainTravelSDKError`](./src/models/errors/traintravelsdkerror.ts): The base class for HTTP error responses.
 
-In some rare cases, the SDK can fail to get a response from the server or even make the request due to unexpected circumstances such as network conditions. These types of errors are captured in the `models/errors/httpclienterrors.ts` module:
+<details><summary>Less common errors (6)</summary>
 
-| HTTP Client Error                                    | Description                                          |
-| ---------------------------------------------------- | ---------------------------------------------------- |
-| RequestAbortedError                                  | HTTP request was aborted by the client               |
-| RequestTimeoutError                                  | HTTP request timed out due to an AbortSignal signal  |
-| ConnectionError                                      | HTTP client was unable to make a request to a server |
-| InvalidRequestError                                  | Any input used to create a request is invalid        |
-| UnexpectedClientError                                | Unrecognised or unexpected error                     |
+<br />
+
+**Network errors:**
+* [`ConnectionError`](./src/models/errors/httpclienterrors.ts): HTTP client was unable to make a request to a server.
+* [`RequestTimeoutError`](./src/models/errors/httpclienterrors.ts): HTTP request timed out due to an AbortSignal signal.
+* [`RequestAbortedError`](./src/models/errors/httpclienterrors.ts): HTTP request was aborted by the client.
+* [`InvalidRequestError`](./src/models/errors/httpclienterrors.ts): Any input used to create a request is invalid.
+* [`UnexpectedClientError`](./src/models/errors/httpclienterrors.ts): Unrecognised or unexpected error.
+
+
+**Inherit from [`TrainTravelSDKError`](./src/models/errors/traintravelsdkerror.ts)**:
+* [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
+
+</details>
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -404,10 +385,10 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 You can override the default server globally by passing a server index to the `serverIdx: number` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| #   | Server                                                |
-| --- | ----------------------------------------------------- |
-| 0   | `https://try.microcks.io/rest/Train+Travel+API/1.0.0` |
-| 1   | `https://api.example.com`                             |
+| #   | Server                                                | Description |
+| --- | ----------------------------------------------------- | ----------- |
+| 0   | `https://try.microcks.io/rest/Train+Travel+API/1.0.0` | Mock Server |
+| 1   | `https://api.example.com`                             | Production  |
 
 #### Example
 
@@ -415,20 +396,17 @@ You can override the default server globally by passing a server index to the `s
 import { TrainTravelSDK } from "train-travel-sdk";
 
 const trainTravelSDK = new TrainTravelSDK({
-  serverIdx: 1,
+  serverIdx: 0,
   oAuth2: process.env["TRAINTRAVELSDK_O_AUTH2"] ?? "",
 });
 
 async function run() {
   const result = await trainTravelSDK.stations.list({
-    page: 1,
-    limit: 10,
     coordinates: "52.5200,13.4050",
-    search: "Paris",
+    search: "Milano Centrale",
     country: "DE",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -443,20 +421,17 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { TrainTravelSDK } from "train-travel-sdk";
 
 const trainTravelSDK = new TrainTravelSDK({
-  serverURL: "https://try.microcks.io/rest/Train+Travel+API/1.0.0",
+  serverURL: "https://api.example.com",
   oAuth2: process.env["TRAINTRAVELSDK_O_AUTH2"] ?? "",
 });
 
 async function run() {
   const result = await trainTravelSDK.stations.list({
-    page: 1,
-    limit: 10,
     coordinates: "52.5200,13.4050",
-    search: "Paris",
+    search: "Milano Centrale",
     country: "DE",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -478,19 +453,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "train-travel-sdk/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {
@@ -510,7 +489,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new TrainTravelSDK({ httpClient });
+const sdk = new TrainTravelSDK({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
