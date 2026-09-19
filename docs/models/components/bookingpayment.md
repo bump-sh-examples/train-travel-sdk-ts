@@ -1,5 +1,7 @@
 # BookingPayment
 
+A payment for a booking.
+
 ## Example Usage
 
 ```typescript
