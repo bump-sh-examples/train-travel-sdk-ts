@@ -4,13 +4,13 @@
 
 import { TrainTravelSDKCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,39 +18,75 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { TrainTravelSDKError } from "../models/errors/traintravelsdkerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+export enum GetAcceptEnum {
+  applicationJson = "application/json",
+  applicationXml = "application/xml",
+}
+
 /**
- * Delete a booking
+ * Get a booking
  *
  * @remarks
- * Deletes a booking, cancelling the hold on the trip.
+ * Returns the details of a specific booking.
  */
-export async function bookingsDelete(
+export function bookingAndPaymentBookingsGet(
   client: TrainTravelSDKCore,
-  request: operations.DeleteBookingRequest,
-  options?: RequestOptions,
-): Promise<
+  request: operations.GetBookingRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: GetAcceptEnum },
+): APIPromise<
   Result<
-    operations.DeleteBookingResponse | undefined,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    operations.GetBookingResponse,
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
+> {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: TrainTravelSDKCore,
+  request: operations.GetBookingRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: GetAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.GetBookingResponse,
+      | TrainTravelSDKError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    APICall,
+  ]
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.DeleteBookingRequest$outboundSchema.parse(value),
+    (value) => operations.GetBookingRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -61,11 +97,11 @@ export async function bookingsDelete(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/bookings/{bookingId}")(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: "*/*",
+    Accept: options?.acceptHeaderOverride
+      || "application/json;q=1, application/xml;q=0",
   }));
 
   const secConfig = await extractSecurity(client._options.oAuth2);
@@ -73,8 +109,10 @@ export async function bookingsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "delete-booking",
-    oAuth2Scopes: [],
+    options: client._options,
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
+    operationID: "get-booking",
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -97,26 +135,28 @@ export async function bookingsDelete(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "DELETE",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -125,24 +165,33 @@ export async function bookingsDelete(
   };
 
   const [result] = await M.match<
-    operations.DeleteBookingResponse | undefined,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    operations.GetBookingResponse,
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
-    M.nil(204, operations.DeleteBookingResponse$inboundSchema.optional()),
+    M.json(200, operations.GetBookingResponse$inboundSchema, {
+      hdrs: true,
+      key: "Result",
+    }),
+    M.bytes(200, operations.GetBookingResponse$inboundSchema, {
+      ctype: "application/xml",
+      hdrs: true,
+      key: "Result",
+    }),
     M.fail([400, 401, 403, 404, 429]),
     M.fail(500),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

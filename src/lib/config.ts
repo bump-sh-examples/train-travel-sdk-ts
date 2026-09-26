@@ -8,31 +8,37 @@ import { RetryConfig } from "./retries.js";
 import { Params, pathToFunc } from "./url.js";
 
 /**
+ * A mock server for testing and development purposes
+ */
+export const ServerMockServer = "Mock Server";
+/**
+ * The production server for the Train Travel API
+ */
+export const ServerProduction = "Production";
+/**
  * Contains the list of servers available to the SDK
  */
-export const ServerList = [
-  /**
-   * Mock Server
-   */
-  "https://try.microcks.io/rest/Train+Travel+API/1.0.0",
-  /**
-   * Production
-   */
-  "https://api.example.com",
-] as const;
+export const ServerList = {
+  [ServerMockServer]: "https://try.microcks.io/rest/Train+Travel+API/1.0.0",
+  [ServerProduction]: "https://api.example.com",
+} as const;
 
 export type SDKOptions = {
-  oAuth2?: string | (() => Promise<string>);
+  oAuth2?: string | (() => Promise<string>) | undefined;
 
   httpClient?: HTTPClient;
   /**
    * Allows overriding the default server used by the SDK
    */
-  serverIdx?: number;
+  server?: keyof typeof ServerList | undefined;
   /**
    * Allows overriding the default server URL used by the SDK
    */
-  serverURL?: string;
+  serverURL?: string | undefined;
+  /**
+   * Allows overriding the default user agent used by the SDK
+   */
+  userAgent?: string | undefined;
   /**
    * Allows overriding the default retry config used by the SDK
    */
@@ -47,11 +53,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
   const params: Params = {};
 
   if (!serverURL) {
-    const serverIdx = options.serverIdx ?? 0;
-    if (serverIdx < 0 || serverIdx >= ServerList.length) {
-      throw new Error(`Invalid server index ${serverIdx}`);
-    }
-    serverURL = ServerList[serverIdx] || "";
+    const server = options.server ?? ServerMockServer;
+    serverURL = ServerList[server] || "";
   }
 
   const u = pathToFunc(serverURL)(params);
@@ -60,8 +63,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 
 export const SDK_METADATA = {
   language: "typescript",
-  openapiDocVersion: "1.2.0",
-  sdkVersion: "0.2.0",
-  genVersion: "2.493.23",
-  userAgent: "speakeasy-sdk/typescript 0.2.0 2.493.23 1.2.0 train-travel-sdk",
+  openapiDocVersion: "1.3.0",
+  sdkVersion: "0.3.0",
+  genVersion: "2.941.0",
+  userAgent: "speakeasy-sdk/typescript 0.3.0 2.941.0 1.3.0 train-travel-sdk",
 } as const;

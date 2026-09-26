@@ -1,11 +1,13 @@
-# GetTripsTripsLinks
+# QueryStationsStationsLinks
+
+Links to the next and previous pages of a paginated response.
 
 ## Example Usage
 
 ```typescript
-import { GetTripsTripsLinks } from "train-travel-sdk/models/operations";
+import { QueryStationsStationsLinks } from "train-travel-sdk/models/operations";
 
-let value: GetTripsTripsLinks = {};
+let value: QueryStationsStationsLinks = {};
 ```
 
 ## Fields
