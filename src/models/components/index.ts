@@ -9,4 +9,6 @@ export * from "./linksbooking.js";
 export * from "./linksself.js";
 export * from "./security.js";
 export * from "./station.js";
+export * from "./stationquery.js";
 export * from "./trip.js";
+export * from "./tripupdate.js";

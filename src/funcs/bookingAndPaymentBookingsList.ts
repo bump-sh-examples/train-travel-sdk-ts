@@ -3,15 +3,14 @@
  */
 
 import { TrainTravelSDKCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeFormQuery } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
-import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -19,52 +18,87 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { TrainTravelSDKError } from "../models/errors/traintravelsdkerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
-export enum CreateJsonAcceptEnum {
+export enum ListAcceptEnum {
   applicationJson = "application/json",
   applicationXml = "application/xml",
 }
 
 /**
- * Create a booking
+ * List existing bookings
  *
  * @remarks
- * A booking is a temporary hold on a trip. It is not confirmed until the payment is processed.
+ * Returns a list of all trip bookings by the authenticated user.
  */
-export async function bookingsCreateJson(
+export function bookingAndPaymentBookingsList(
   client: TrainTravelSDKCore,
-  request: components.BookingInput,
-  options?: RequestOptions & { acceptHeaderOverride?: CreateJsonAcceptEnum },
-): Promise<
+  request: operations.GetBookingsRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: ListAcceptEnum },
+): APIPromise<
   Result<
-    operations.CreateBookingJsonResponse,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    operations.GetBookingsResponse,
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
+> {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: TrainTravelSDKCore,
+  request: operations.GetBookingsRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: ListAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.GetBookingsResponse,
+      | TrainTravelSDKError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    APICall,
+  ]
 > {
   const parsed = safeParse(
     request,
-    (value) => components.BookingInput$outboundSchema.parse(value),
+    (value) => operations.GetBookingsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload, { explode: true });
+  const body = null;
 
   const path = pathToFunc("/bookings")();
 
+  const query = encodeFormQuery({
+    "limit": payload.limit,
+    "page": payload.page,
+  });
+
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: options?.acceptHeaderOverride
       || "application/json;q=1, application/xml;q=0",
   }));
@@ -74,8 +108,10 @@ export async function bookingsCreateJson(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "create-booking_json",
-    oAuth2Scopes: [],
+    options: client._options,
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
+    operationID: "get-bookings",
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -98,26 +134,29 @@ export async function bookingsCreateJson(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "404", "409", "429", "4XX", "500", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -126,30 +165,33 @@ export async function bookingsCreateJson(
   };
 
   const [result] = await M.match<
-    operations.CreateBookingJsonResponse,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    operations.GetBookingsResponse,
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
-    M.json(201, operations.CreateBookingJsonResponse$inboundSchema, {
+    M.json(200, operations.GetBookingsResponse$inboundSchema, {
+      hdrs: true,
       key: "Result",
     }),
-    M.bytes(201, operations.CreateBookingJsonResponse$inboundSchema, {
+    M.bytes(200, operations.GetBookingsResponse$inboundSchema, {
       ctype: "application/xml",
+      hdrs: true,
       key: "Result",
     }),
-    M.fail([400, 401, 404, 409, 429]),
+    M.fail([400, 401, 403, 429]),
     M.fail(500),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

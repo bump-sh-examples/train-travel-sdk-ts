@@ -3,14 +3,14 @@
  */
 
 import { TrainTravelSDKCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,61 +18,84 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { TrainTravelSDKError } from "../models/errors/traintravelsdkerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
-export enum ListAcceptEnum {
-  applicationJson = "application/json",
-  applicationXml = "application/xml",
-}
-
 /**
- * Get a list of train stations
+ * Delete a booking
  *
  * @remarks
- * Returns a paginated and searchable list of all train stations.
+ * Deletes a booking, cancelling the hold on the trip.
  */
-export async function stationsList(
+export function bookingAndPaymentBookingsDelete(
   client: TrainTravelSDKCore,
-  request: operations.GetStationsRequest,
-  options?: RequestOptions & { acceptHeaderOverride?: ListAcceptEnum },
-): Promise<
+  request: operations.DeleteBookingRequest,
+  options?: RequestOptions,
+): APIPromise<
   Result<
-    operations.GetStationsResponse,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    operations.DeleteBookingResponse | undefined,
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
+> {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: TrainTravelSDKCore,
+  request: operations.DeleteBookingRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.DeleteBookingResponse | undefined,
+      | TrainTravelSDKError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    APICall,
+  ]
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetStationsRequest$outboundSchema.parse(value),
+    (value) => operations.DeleteBookingRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/stations")();
-
-  const query = encodeFormQuery({
-    "coordinates": payload.coordinates,
-    "country": payload.country,
-    "limit": payload.limit,
-    "page": payload.page,
-    "search": payload.search,
-  });
+  const pathParams = {
+    bookingId: encodeSimple("bookingId", payload.bookingId, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/bookings/{bookingId}")(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: options?.acceptHeaderOverride
-      || "application/json;q=1, application/xml;q=0",
+    Accept: "*/*",
   }));
 
   const secConfig = await extractSecurity(client._options.oAuth2);
@@ -80,8 +103,10 @@ export async function stationsList(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "get-stations",
-    oAuth2Scopes: [],
+    options: client._options,
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
+    operationID: "delete-booking",
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -104,27 +129,28 @@ export async function stationsList(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "DELETE",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "429", "4XX", "500", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -133,32 +159,25 @@ export async function stationsList(
   };
 
   const [result] = await M.match<
-    operations.GetStationsResponse,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    operations.DeleteBookingResponse | undefined,
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
-    M.json(200, operations.GetStationsResponse$inboundSchema, {
-      hdrs: true,
-      key: "Result",
-    }),
-    M.bytes(200, operations.GetStationsResponse$inboundSchema, {
-      ctype: "application/xml",
-      hdrs: true,
-      key: "Result",
-    }),
-    M.fail([400, 401, 403, 429]),
+    M.nil(204, operations.DeleteBookingResponse$inboundSchema.optional()),
+    M.fail([400, 401, 403, 404, 429]),
     M.fail(500),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }
