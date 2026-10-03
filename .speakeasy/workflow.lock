@@ -1,21 +1,20 @@
-speakeasyVersion: 1.469.2
+speakeasyVersion: 1.800.1
 sources:
     Train Travel API:
         sourceNamespace: train-travel-api
-        sourceRevisionDigest: sha256:c11cbb8c2b1ea1e7047c4201d91f548868f5961228f6cd6b2053da8d73b30ab2
-        sourceBlobDigest: sha256:7ad89eaf9d9be4561a4cefa092c6976888e9be5790730b0fce29c4c6d904af53
+        sourceRevisionDigest: sha256:e23ebadc2f74a640f2d579e3a69ab8e3930c748aaec0b14d24ccf57938889889
+        sourceBlobDigest: sha256:e6f95c5869c7333e4f3878473b0c963d965562c77f215fe88ac711207f2d0ceb
         tags:
             - latest
-            - speakeasy-sdk-regen-1735004717
-            - 1.2.0
+            - 1.3.0
 targets:
     train-travel-sdk:
         source: Train Travel API
         sourceNamespace: train-travel-api
-        sourceRevisionDigest: sha256:c11cbb8c2b1ea1e7047c4201d91f548868f5961228f6cd6b2053da8d73b30ab2
-        sourceBlobDigest: sha256:7ad89eaf9d9be4561a4cefa092c6976888e9be5790730b0fce29c4c6d904af53
+        sourceRevisionDigest: sha256:e23ebadc2f74a640f2d579e3a69ab8e3930c748aaec0b14d24ccf57938889889
+        sourceBlobDigest: sha256:e6f95c5869c7333e4f3878473b0c963d965562c77f215fe88ac711207f2d0ceb
         codeSamplesNamespace: train-travel-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:3ce1fcc625567e81245b648cb35051d3509917a6a3c9b423ee1496659103833d
+        codeSamplesRevisionDigest: sha256:ed6ff75c25faa9bc318eb54b24d664b5ed7eddd7ac3691f2473f3b3f6cf1852e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
