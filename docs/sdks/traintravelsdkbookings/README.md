@@ -1,5 +1,4 @@
-# Bookings
-(*bookings*)
+# BookingPayment.Bookings
 
 ## Overview
 
@@ -21,6 +20,7 @@ Returns a list of all trip bookings by the authenticated user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-bookings" method="get" path="/bookings" example="GetBookingsResponse200" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -29,12 +29,8 @@ const trainTravelSDK = new TrainTravelSDK({
 });
 
 async function run() {
-  const result = await trainTravelSDK.bookings.list({
-    page: 1,
-    limit: 10,
-  });
+  const result = await trainTravelSDK.bookingPayment.bookings.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -47,7 +43,7 @@ The standalone function version of this method:
 
 ```typescript
 import { TrainTravelSDKCore } from "train-travel-sdk/core.js";
-import { bookingsList } from "train-travel-sdk/funcs/bookingsList.js";
+import { bookingPaymentBookingsList } from "train-travel-sdk/funcs/bookingPaymentBookingsList.js";
 
 // Use `TrainTravelSDKCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -56,19 +52,13 @@ const trainTravelSDK = new TrainTravelSDKCore({
 });
 
 async function run() {
-  const res = await bookingsList(trainTravelSDK, {
-    page: 1,
-    limit: 10,
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await bookingPaymentBookingsList(trainTravelSDK, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingPaymentBookingsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -97,8 +87,9 @@ run();
 
 A booking is a temporary hold on a trip. It is not confirmed until the payment is processed.
 
-### Example Usage
+### Example Usage: CreateBookingResponse201
 
+<!-- UsageSnippet language="typescript" operationID="create-booking_json" method="post" path="/bookings" example="CreateBookingResponse201" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -107,12 +98,11 @@ const trainTravelSDK = new TrainTravelSDK({
 });
 
 async function run() {
-  const result = await trainTravelSDK.bookings.createJson({
+  const result = await trainTravelSDK.bookingPayment.bookings.createJson({
     tripId: "4f4e4e1-c824-4d63-b37a-d8d698862f1d",
     passengerName: "John Doe",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -125,7 +115,7 @@ The standalone function version of this method:
 
 ```typescript
 import { TrainTravelSDKCore } from "train-travel-sdk/core.js";
-import { bookingsCreateJson } from "train-travel-sdk/funcs/bookingsCreateJson.js";
+import { bookingPaymentBookingsCreateJson } from "train-travel-sdk/funcs/bookingPaymentBookingsCreateJson.js";
 
 // Use `TrainTravelSDKCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -134,19 +124,71 @@ const trainTravelSDK = new TrainTravelSDKCore({
 });
 
 async function run() {
-  const res = await bookingsCreateJson(trainTravelSDK, {
+  const res = await bookingPaymentBookingsCreateJson(trainTravelSDK, {
     tripId: "4f4e4e1-c824-4d63-b37a-d8d698862f1d",
     passengerName: "John Doe",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingPaymentBookingsCreateJson failed:", res.error);
   }
+}
 
-  const { value: result } = res;
+run();
+```
+### Example Usage: RequestBodyBooking
 
-  // Handle the result
+<!-- UsageSnippet language="typescript" operationID="create-booking_json" method="post" path="/bookings" example="RequestBodyBooking" -->
+```typescript
+import { TrainTravelSDK } from "train-travel-sdk";
+
+const trainTravelSDK = new TrainTravelSDK({
+  oAuth2: process.env["TRAINTRAVELSDK_O_AUTH2"] ?? "",
+});
+
+async function run() {
+  const result = await trainTravelSDK.bookingPayment.bookings.createJson({
+    tripId: "4f4e4e1-c824-4d63-b37a-d8d698862f1d",
+    passengerName: "John Doe",
+    hasBicycle: true,
+    hasDog: true,
+  });
+
   console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { TrainTravelSDKCore } from "train-travel-sdk/core.js";
+import { bookingPaymentBookingsCreateJson } from "train-travel-sdk/funcs/bookingPaymentBookingsCreateJson.js";
+
+// Use `TrainTravelSDKCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const trainTravelSDK = new TrainTravelSDKCore({
+  oAuth2: process.env["TRAINTRAVELSDK_O_AUTH2"] ?? "",
+});
+
+async function run() {
+  const res = await bookingPaymentBookingsCreateJson(trainTravelSDK, {
+    tripId: "4f4e4e1-c824-4d63-b37a-d8d698862f1d",
+    passengerName: "John Doe",
+    hasBicycle: true,
+    hasDog: true,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingPaymentBookingsCreateJson failed:", res.error);
+  }
 }
 
 run();
@@ -175,8 +217,9 @@ run();
 
 A booking is a temporary hold on a trip. It is not confirmed until the payment is processed.
 
-### Example Usage
+### Example Usage: CreateBookingResponse201
 
+<!-- UsageSnippet language="typescript" operationID="create-booking_raw" method="post" path="/bookings" example="CreateBookingResponse201" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -185,9 +228,8 @@ const trainTravelSDK = new TrainTravelSDK({
 });
 
 async function run() {
-  const result = await trainTravelSDK.bookings.createRaw(bytesToStream(new TextEncoder().encode("0x6f39dACC0a")));
+  const result = await trainTravelSDK.bookingPayment.bookings.createRaw(bytesToStream(new TextEncoder().encode("{\"trip_id\":\"4f4e4e1-c824-4d63-b37a-d8d698862f1d\",\"passenger_name\":\"John Doe\"}")));
 
-  // Handle the result
   console.log(result);
 }
 
@@ -200,7 +242,7 @@ The standalone function version of this method:
 
 ```typescript
 import { TrainTravelSDKCore } from "train-travel-sdk/core.js";
-import { bookingsCreateRaw } from "train-travel-sdk/funcs/bookingsCreateRaw.js";
+import { bookingPaymentBookingsCreateRaw } from "train-travel-sdk/funcs/bookingPaymentBookingsCreateRaw.js";
 
 // Use `TrainTravelSDKCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -209,16 +251,58 @@ const trainTravelSDK = new TrainTravelSDKCore({
 });
 
 async function run() {
-  const res = await bookingsCreateRaw(trainTravelSDK, bytesToStream(new TextEncoder().encode("0x9Ddb88478b")));
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await bookingPaymentBookingsCreateRaw(trainTravelSDK, bytesToStream(new TextEncoder().encode("{\"trip_id\":\"4f4e4e1-c824-4d63-b37a-d8d698862f1d\",\"passenger_name\":\"John Doe\"}")));
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingPaymentBookingsCreateRaw failed:", res.error);
   }
+}
 
-  const { value: result } = res;
+run();
+```
+### Example Usage: RequestBodyBooking
 
-  // Handle the result
+<!-- UsageSnippet language="typescript" operationID="create-booking_raw" method="post" path="/bookings" example="RequestBodyBooking" -->
+```typescript
+import { TrainTravelSDK } from "train-travel-sdk";
+
+const trainTravelSDK = new TrainTravelSDK({
+  oAuth2: process.env["TRAINTRAVELSDK_O_AUTH2"] ?? "",
+});
+
+async function run() {
+  const result = await trainTravelSDK.bookingPayment.bookings.createRaw(bytesToStream(new TextEncoder().encode("{\"trip_id\":\"4f4e4e1-c824-4d63-b37a-d8d698862f1d\",\"passenger_name\":\"John Doe\",\"has_bicycle\":true,\"has_dog\":true}")));
+
   console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { TrainTravelSDKCore } from "train-travel-sdk/core.js";
+import { bookingPaymentBookingsCreateRaw } from "train-travel-sdk/funcs/bookingPaymentBookingsCreateRaw.js";
+
+// Use `TrainTravelSDKCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const trainTravelSDK = new TrainTravelSDKCore({
+  oAuth2: process.env["TRAINTRAVELSDK_O_AUTH2"] ?? "",
+});
+
+async function run() {
+  const res = await bookingPaymentBookingsCreateRaw(trainTravelSDK, bytesToStream(new TextEncoder().encode("{\"trip_id\":\"4f4e4e1-c824-4d63-b37a-d8d698862f1d\",\"passenger_name\":\"John Doe\",\"has_bicycle\":true,\"has_dog\":true}")));
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingPaymentBookingsCreateRaw failed:", res.error);
+  }
 }
 
 run();
@@ -249,6 +333,7 @@ Returns the details of a specific booking.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-booking" method="get" path="/bookings/{bookingId}" example="GetBookingResponse200" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -257,11 +342,10 @@ const trainTravelSDK = new TrainTravelSDK({
 });
 
 async function run() {
-  const result = await trainTravelSDK.bookings.get({
+  const result = await trainTravelSDK.bookingPayment.bookings.get({
     bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -274,7 +358,7 @@ The standalone function version of this method:
 
 ```typescript
 import { TrainTravelSDKCore } from "train-travel-sdk/core.js";
-import { bookingsGet } from "train-travel-sdk/funcs/bookingsGet.js";
+import { bookingPaymentBookingsGet } from "train-travel-sdk/funcs/bookingPaymentBookingsGet.js";
 
 // Use `TrainTravelSDKCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -283,18 +367,15 @@ const trainTravelSDK = new TrainTravelSDKCore({
 });
 
 async function run() {
-  const res = await bookingsGet(trainTravelSDK, {
+  const res = await bookingPaymentBookingsGet(trainTravelSDK, {
     bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingPaymentBookingsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -325,6 +406,7 @@ Deletes a booking, cancelling the hold on the trip.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-booking" method="delete" path="/bookings/{bookingId}" -->
 ```typescript
 import { TrainTravelSDK } from "train-travel-sdk";
 
@@ -333,11 +415,10 @@ const trainTravelSDK = new TrainTravelSDK({
 });
 
 async function run() {
-  const result = await trainTravelSDK.bookings.delete({
+  const result = await trainTravelSDK.bookingPayment.bookings.delete({
     bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -350,7 +431,7 @@ The standalone function version of this method:
 
 ```typescript
 import { TrainTravelSDKCore } from "train-travel-sdk/core.js";
-import { bookingsDelete } from "train-travel-sdk/funcs/bookingsDelete.js";
+import { bookingPaymentBookingsDelete } from "train-travel-sdk/funcs/bookingPaymentBookingsDelete.js";
 
 // Use `TrainTravelSDKCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -359,18 +440,15 @@ const trainTravelSDK = new TrainTravelSDKCore({
 });
 
 async function run() {
-  const res = await bookingsDelete(trainTravelSDK, {
+  const res = await bookingPaymentBookingsDelete(trainTravelSDK, {
     bookingId: "1725ff48-ab45-4bb5-9d02-88745177dedb",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bookingPaymentBookingsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

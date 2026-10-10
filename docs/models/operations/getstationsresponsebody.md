@@ -11,10 +11,10 @@ let value: GetStationsResponseBody = {
   data: [
     {
       id: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e",
-      name: "Paris Gare du Nord",
-      address: "18 Rue de Dunkerque 75010 Paris, France",
+      name: "Berlin Hauptbahnhof",
+      address: "Invalidenstraße 10557 Berlin, Germany",
       countryCode: "DE",
-      timezone: "Europe/Paris",
+      timezone: "Europe/Berlin",
     },
   ],
 };
@@ -22,7 +22,7 @@ let value: GetStationsResponseBody = {
 
 ## Fields
 
-| Field                                                      | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `data`                                                     | [components.Station](../../models/components/station.md)[] | :heavy_minus_sign:                                         | N/A                                                        |
-| `links`                                                    | [operations.Links](../../models/operations/links.md)       | :heavy_minus_sign:                                         | N/A                                                        |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `data`                                                                                     | [components.Station](../../models/components/station.md)[]                                 | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `links`                                                                                    | [operations.GetStationsStationsLinks](../../models/operations/getstationsstationslinks.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |
