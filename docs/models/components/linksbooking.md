@@ -1,5 +1,7 @@
 # LinksBooking
 
+The link to the booking resource.
+
 ## Example Usage
 
 ```typescript
