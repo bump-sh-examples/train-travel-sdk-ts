@@ -1,5 +1,7 @@
 # GetTripsLinks
 
+Links to the next and previous pages of a paginated response.
+
 ## Example Usage
 
 ```typescript
