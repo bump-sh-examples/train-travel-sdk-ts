@@ -10,11 +10,11 @@ import { GetStationsStationsResponseBody } from "train-travel-sdk/models/operati
 let value: GetStationsStationsResponseBody = {
   data: [
     {
-      id: "b2e783e1-c824-4d63-b37a-d8d698862f1d",
-      name: "Paris Gare du Nord",
-      address: "18 Rue de Dunkerque 75010 Paris, France",
+      id: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e",
+      name: "Berlin Hauptbahnhof",
+      address: "Invalidenstraße 10557 Berlin, Germany",
       countryCode: "DE",
-      timezone: "Europe/Paris",
+      timezone: "Europe/Berlin",
     },
   ],
 };
