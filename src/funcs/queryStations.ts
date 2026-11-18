@@ -3,14 +3,14 @@
  */
 
 import { TrainTravelSDKCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeFormQuery, encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,61 +18,92 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { TrainTravelSDKError } from "../models/errors/traintravelsdkerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
-export enum ListAcceptEnum {
+export enum QueryStationsAcceptEnum {
   applicationJson = "application/json",
   applicationXml = "application/xml",
 }
 
 /**
- * Get available train trips
+ * Query train stations
  *
  * @remarks
- * Returns a list of available train trips between the specified origin and destination stations on the given date, and allows for filtering by bicycle and dog allowances.
+ * Returns a paginated and searchable list of train stations.
+ *
+ * Uses the HTTP [QUERY](https://www.ietf.org/archive/id/draft-ietf-httpbis-safe-method-w-body-08.html)
+ * method: filter criteria are sent in the request body (safe and idempotent,
+ * like GET, but without putting search terms in the URL).
  */
-export async function tripsList(
+export function queryStations(
   client: TrainTravelSDKCore,
-  request: operations.GetTripsRequest,
-  options?: RequestOptions & { acceptHeaderOverride?: ListAcceptEnum },
-): Promise<
+  request: operations.QueryStationsRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: QueryStationsAcceptEnum },
+): APIPromise<
   Result<
-    operations.GetTripsResponse,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    operations.QueryStationsResponse,
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
+> {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: TrainTravelSDKCore,
+  request: operations.QueryStationsRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: QueryStationsAcceptEnum },
+): Promise<
+  [
+    Result<
+      operations.QueryStationsResponse,
+      | TrainTravelSDKError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    APICall,
+  ]
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetTripsRequest$outboundSchema.parse(value),
+    (value) => operations.QueryStationsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.StationQuery, { explode: true });
 
-  const path = pathToFunc("/trips")();
+  const path = pathToFunc("/stations")();
 
   const query = encodeFormQuery({
-    "bicycles": payload.bicycles,
-    "date": payload.date,
-    "destination": payload.destination,
-    "dogs": payload.dogs,
     "limit": payload.limit,
-    "origin": payload.origin,
     "page": payload.page,
   });
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: options?.acceptHeaderOverride
       || "application/json;q=1, application/xml;q=0",
   }));
@@ -82,8 +113,10 @@ export async function tripsList(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "get-trips",
-    oAuth2Scopes: [],
+    options: client._options,
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
+    operationID: "query-stations",
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -106,27 +139,29 @@ export async function tripsList(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "QUERY",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
     query: query,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "429", "4XX", "500", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -135,20 +170,21 @@ export async function tripsList(
   };
 
   const [result] = await M.match<
-    operations.GetTripsResponse,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    operations.QueryStationsResponse,
+    | TrainTravelSDKError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
-    M.json(200, operations.GetTripsResponse$inboundSchema, {
+    M.json(200, operations.QueryStationsResponse$inboundSchema, {
       hdrs: true,
       key: "Result",
     }),
-    M.bytes(200, operations.GetTripsResponse$inboundSchema, {
+    M.bytes(200, operations.QueryStationsResponse$inboundSchema, {
       ctype: "application/xml",
       hdrs: true,
       key: "Result",
@@ -157,10 +193,10 @@ export async function tripsList(
     M.fail(500),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

@@ -7,23 +7,28 @@ import { env } from "./env.js";
 
 type OAuth2PasswordFlow = {
   username: string;
-  password?: string | undefined;
-  clientID: string;
+  password: string;
+  clientID?: string | undefined;
   clientSecret?: string | undefined;
   tokenURL: string;
 };
 
-export enum SecurityErrorCode {
-  Incomplete = "incomplete",
-  UnrecognisedSecurityType = "unrecognized_security_type",
-}
+export const SecurityErrorCode = {
+  Incomplete: "incomplete",
+  UnrecognisedSecurityType: "unrecognized_security_type",
+} as const;
+export type SecurityErrorCode =
+  (typeof SecurityErrorCode)[keyof typeof SecurityErrorCode];
 
 export class SecurityError extends Error {
+  public code: SecurityErrorCode;
+
   constructor(
-    public code: SecurityErrorCode,
+    code: SecurityErrorCode,
     message: string,
   ) {
     super(message);
+    this.code = code;
     this.name = "SecurityError";
   }
 
@@ -84,9 +89,14 @@ type SecurityInputOAuth2 = {
 type SecurityInputOAuth2ClientCredentials = {
   type: "oauth2:client_credentials";
   value:
-    | { clientID?: string | undefined; clientSecret?: string | undefined }
+    | {
+      clientID?: string | undefined;
+      clientSecret?: string | undefined;
+    }
     | null
+    | string
     | undefined;
+  fieldName?: string;
 };
 
 type SecurityInputOAuth2PasswordCredentials = {
@@ -95,13 +105,13 @@ type SecurityInputOAuth2PasswordCredentials = {
     | string
     | null
     | undefined;
-  fieldName: string;
+  fieldName?: string;
 };
 
 type SecurityInputCustom = {
   type: "http:custom";
   value: any | null | undefined;
-  fieldName: string;
+  fieldName?: string;
 };
 
 export type SecurityInput =
@@ -138,6 +148,9 @@ export function resolveSecurity(
           typeof o.value === "string" && !!o.value
         );
       } else if (o.type === "oauth2:client_credentials") {
+        if (typeof o.value == "string") {
+          return !!o.value;
+        }
         return o.value.clientID != null || o.value.clientSecret != null;
       } else if (typeof o.value === "string") {
         return !!o.value;
@@ -190,8 +203,7 @@ export function resolveSecurity(
         applyBearer(state, spec);
         break;
       default:
-        spec satisfies never;
-        throw SecurityError.unrecognizedType(type);
+        throw SecurityError.unrecognizedType((spec satisfies never, type));
     }
   });
 
@@ -226,13 +238,16 @@ function applyBearer(
     value = `Bearer ${value}`;
   }
 
-  state.headers[spec.fieldName] = value;
+  if (spec.fieldName !== undefined) {
+    state.headers[spec.fieldName] = value;
+  }
 }
 
 export function resolveGlobalSecurity(
   security: Partial<components.Security> | null | undefined,
+  allowedFields?: number[],
 ): SecurityState | null {
-  return resolveSecurity(
+  let inputs: SecurityInput[][] = [
     [
       {
         fieldName: "Authorization",
@@ -240,7 +255,18 @@ export function resolveGlobalSecurity(
         value: security?.oAuth2 ?? env().TRAINTRAVELSDK_O_AUTH2,
       },
     ],
-  );
+  ];
+
+  if (allowedFields) {
+    inputs = allowedFields.map((i) => {
+      if (i < 0 || i >= inputs.length) {
+        throw new RangeError(`invalid allowedFields index ${i}`);
+      }
+      return inputs[i]!;
+    });
+  }
+
+  return resolveSecurity(...inputs);
 }
 
 export async function extractSecurity<
