@@ -7,15 +7,14 @@ const trainTravelSDK = new TrainTravelSDK({
 });
 
 async function run() {
-  const result = await trainTravelSDK.stations.list({
-    page: 1,
-    limit: 10,
-    coordinates: "52.5200,13.4050",
-    search: "Paris",
-    country: "DE",
+  const result = await trainTravelSDK.queryStations({
+    stationQuery: {
+      coordinates: "52.5200,13.4050",
+      search: "Milano Centrale",
+      country: "IT",
+    },
   });
 
-  // Handle the result
   console.log(result);
 }
 
