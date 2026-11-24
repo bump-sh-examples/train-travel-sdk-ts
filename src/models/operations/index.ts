@@ -10,3 +10,5 @@ export * from "./getbooking.js";
 export * from "./getbookings.js";
 export * from "./getstations.js";
 export * from "./gettrips.js";
+export * from "./querystations.js";
+export * from "./subscribetrip.js";
