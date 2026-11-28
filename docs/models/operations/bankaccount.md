@@ -12,7 +12,7 @@ let value: BankAccount = {
   number: "<value>",
   accountType: "company",
   bankName: "Starling Bank",
-  country: "Mexico",
+  country: "Benin",
 };
 ```
 
@@ -20,7 +20,7 @@ let value: BankAccount = {
 
 | Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              | Example                                                                                  |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `object`                                                                                 | *string*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |                                                                                          |
+| `object`                                                                                 | *"bank_account"*                                                                         | :heavy_minus_sign:                                                                       | N/A                                                                                      |                                                                                          |
 | `name`                                                                                   | *string*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |                                                                                          |
 | `number`                                                                                 | *string*                                                                                 | :heavy_check_mark:                                                                       | The account number for the bank account, in string form. Must be a current account.      |                                                                                          |
 | `sortCode`                                                                               | *string*                                                                                 | :heavy_minus_sign:                                                                       | The sort code for the bank account, in string form. Must be a six-digit number.          |                                                                                          |
