@@ -9,9 +9,9 @@
 const value: operations.GetStationsResponseBody = {
   data: [
     {
-      id: "b2e783e1-c824-4d63-b37a-d8d698862f1d",
-      name: "Paris Gare du Nord",
-      address: "18 Rue de Dunkerque 75010 Paris, France",
+      id: "efdbb9d1-02c2-4bc3-afb7-6788d8782b1e",
+      name: "Berlin Hauptbahnhof",
+      address: "Invalidenstraße 10557 Berlin, Germany",
       countryCode: "DE",
       timezone: "Europe/Berlin",
     },
@@ -22,6 +22,6 @@ const value: operations.GetStationsResponseBody = {
 ### `Uint8Array`
 
 ```typescript
-const value: Uint8Array = new TextEncoder().encode("0x0CBDFBaB2e");
+const value: Uint8Array = new TextEncoder().encode("0xdC7D3f4be0");
 ```
 
